@@ -85,6 +85,10 @@
     header > div{padding-left:20px!important;padding-right:20px!important}
     footer > div{padding-left:20px!important;padding-right:20px!important}
     h2{font-size:29px!important;line-height:1.22!important}
+    .rsp-nav-cta{padding:9px 15px!important;font-size:12px!important}
+    .rsp-namecard{position:static!important;bottom:auto!important;left:auto!important;max-width:none!important;margin-top:12px!important;text-align:center!important}
+    .rsp-foot{flex-direction:column!important;gap:18px!important;padding-top:40px!important;padding-bottom:40px!important}
+    .rsp-foot-right{text-align:left!important}
   }
 </style>
 </head>
@@ -98,12 +102,14 @@
       <a href="#" style="display:block;line-height:0">
         <img src="./logo.png" alt="Souza Neto Advocacia" style="height:62px;width:auto;filter:brightness(0) invert(1);display:block">
       </a>
-      <nav class="rsp-nav-links" style="display:flex;align-items:center;gap:32px">
-        <a href="#como-funciona" style="color:#cdd5df;text-decoration:none;font-size:14px;font-weight:500">Como funciona</a>
-        <a href="#contratos" style="color:#cdd5df;text-decoration:none;font-size:14px;font-weight:500">Contratos</a>
-        <a href="#faq" style="color:#cdd5df;text-decoration:none;font-size:14px;font-weight:500">Dúvidas</a>
-        <a href="#contratar" style="background:#c2a26a;color:#0e1c2e;text-decoration:none;font-size:13px;font-weight:700;padding:11px 22px;border-radius:3px;letter-spacing:0.02em">Contratar agora</a>
-      </nav>
+      <div style="display:flex;align-items:center;gap:28px">
+        <nav class="rsp-nav-links" style="display:flex;align-items:center;gap:32px">
+          <a href="#como-funciona" style="color:#cdd5df;text-decoration:none;font-size:14px;font-weight:500">Como funciona</a>
+          <a href="#contratos" style="color:#cdd5df;text-decoration:none;font-size:14px;font-weight:500">Contratos</a>
+          <a href="#faq" style="color:#cdd5df;text-decoration:none;font-size:14px;font-weight:500">Dúvidas</a>
+        </nav>
+        <a href="#contratar" class="rsp-nav-cta" style="background:#c2a26a;color:#0e1c2e;text-decoration:none;font-size:13px;font-weight:700;padding:11px 22px;border-radius:3px;letter-spacing:0.02em;white-space:nowrap">Contratar agora</a>
+      </div>
     </div>
   </header>
 
@@ -138,8 +144,8 @@
         </div>
       </div>
       <div class="rsp-hero-img" style="position:relative;display:flex;flex-direction:column;min-height:340px;max-height:430px">
-        <img src="./foto-antonio.jpg" alt="Dr. Antônio B. de Souza Neto — Advogado OAB/MS 22.741" style="flex:1;width:100%;object-fit:cover;object-position:center 12%;border-radius:6px;display:block">
-        <div style="position:absolute;bottom:-16px;left:-16px;background:#f6f4ef;color:#1c2430;padding:13px 17px;border-radius:5px;box-shadow:0 16px 40px rgba(0,0,0,0.32);max-width:206px">
+        <img src="./foto-antonio.jpg" alt="Dr. Antônio B. de Souza Neto — Advogado OAB/MS 22.741" style="flex:1;width:100%;object-fit:cover;object-position:center top;border-radius:6px;display:block">
+        <div class="rsp-namecard" style="position:absolute;bottom:-16px;left:-16px;background:#f6f4ef;color:#1c2430;padding:13px 17px;border-radius:5px;box-shadow:0 16px 40px rgba(0,0,0,0.32);max-width:206px">
           <div style="font-family:'Cormorant Garamond',serif;font-size:15.5px;font-weight:600;line-height:1.15">Dr. Antônio B. de Souza Neto</div>
           <div style="font-size:11px;color:#5a6472;margin-top:3px;letter-spacing:0.04em">Advogado · OAB/MS 22.741</div>
         </div>
@@ -282,7 +288,7 @@
   <section id="contratar" style="background:#f6f4ef">
     <div style="max-width:680px;margin:0 auto;padding:100px 32px;text-align:center">
       <span style="font-size:12px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:#c2a26a">Investimento</span>
-      <h2 style="margin-top:18px;font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:600;line-height:1.2;color:#1c2430;text-wrap:balance">Contrate agora e tenha seu contrato em até 24 horas.</h2>
+      <h2 style="margin-top:18px;font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:600;line-height:1.2;color:#1c2430;text-wrap:balance">Contrate agora e tenha seu contrato em até 24 horas.<span style="color:#c2a26a">*</span></h2>
       <div style="margin-top:44px;background:#0e1c2e;color:#f6f4ef;border-radius:10px;padding:52px 40px;box-shadow:0 30px 70px rgba(14,28,46,0.25)">
         <div style="font-size:14px;color:#aab4c1;letter-spacing:0.04em">Contrato personalizado por advogado</div>
         <div style="margin-top:18px;display:flex;align-items:baseline;justify-content:center;gap:8px">
@@ -309,6 +315,8 @@
           <li><strong>Agenda a reunião</strong> com o advogado, no horário que preferir.</li>
         </ol>
       </div>
+
+      <p style="margin:18px auto 0;font-size:12px;line-height:1.55;color:#8a8270;font-style:italic;max-width:600px">* O prazo de 24 horas conta a partir do recebimento de toda a documentação necessária e da realização da reunião, e refere-se à entrega da <strong>primeira versão</strong> do contrato.</p>
 
       <p style="margin-top:22px;text-align:center;font-size:13.5px;color:#8a8270">Dúvidas? Veja as <a href="#faq" style="color:#a8884f;text-decoration:none;font-weight:600;border-bottom:1px solid rgba(168,136,79,0.4)">perguntas frequentes</a> ou escreva para <a href="mailto:contato@souzanetoadvocacia.com.br" style="color:#a8884f;text-decoration:none;font-weight:600">contato@souzanetoadvocacia.com.br</a></p>
     </div>
@@ -367,6 +375,8 @@
         <div style="border:1px solid #e6e1d6;border-radius:7px;padding:24px 26px;background:#fbfaf6"><h3 style="font-size:17px;font-weight:700;color:#1c2430;margin-bottom:9px">Como funciona o pagamento?</h3><p style="font-size:15.5px;line-height:1.65;color:#525b68">À vista por R$ 989,00 ou em até 10x de R$ 98,90 sem juros, no cartão de crédito ou via Pix. O pagamento é feito online, com segurança.</p></div>
         <div style="border:1px solid #e6e1d6;border-radius:7px;padding:24px 26px;background:#fbfaf6"><h3 style="font-size:17px;font-weight:700;color:#1c2430;margin-bottom:9px">Como sei que você é advogado de verdade?</h3><p style="font-size:15.5px;line-height:1.65;color:#525b68">Você confere em 1 minuto no site oficial da OAB (cna.oab.org.br): selecione a seccional MS e busque pelo número 22.741 ou pelo nome Antônio Barbosa de Souza Neto. O registro aparece ativo e regular, com foto.</p></div>
         <div style="border:1px solid #e6e1d6;border-radius:7px;padding:24px 26px;background:#fbfaf6"><h3 style="font-size:17px;font-weight:700;color:#1c2430;margin-bottom:9px">E se eu precisar de um tipo de contrato que não está na lista?</h3><p style="font-size:15.5px;line-height:1.65;color:#525b68">A lista é só uma amostra. Qualquer contrato que você precisar, a gente faz — fale com a gente e explique sua necessidade.</p></div>
+        <div style="border:1px solid #e6e1d6;border-radius:7px;padding:24px 26px;background:#fbfaf6"><h3 style="font-size:17px;font-weight:700;color:#1c2430;margin-bottom:9px">O que acontece depois que eu pago?</h3><p style="font-size:15.5px;line-height:1.65;color:#525b68">Você é direcionado para uma página com dois passos: enviar suas informações e documentos e agendar a reunião com o advogado. Não precisa ter os documentos na hora — você pode enviá-los pelo mesmo link quando tiver, dentro do prazo de 15 dias.</p></div>
+        <div style="border:1px solid #e6e1d6;border-radius:7px;padding:24px 26px;background:#fbfaf6"><h3 style="font-size:17px;font-weight:700;color:#1c2430;margin-bottom:9px">Quais documentos vou precisar enviar?</h3><p style="font-size:15.5px;line-height:1.65;color:#525b68">Depende do contrato, mas em geral: RG e CPF das partes e comprovantes do que foi combinado. Em imóveis, a matrícula; em veículos, o documento (CRLV). Você envia tudo com segurança pelo nosso formulário e pode complementar depois, sem pressa, dentro do prazo.</p></div>
       </div>
     </div>
   </section>
@@ -384,11 +394,11 @@
 
   <!-- RODAPÉ -->
   <footer style="background:#0a1626;color:#9aa4b2;border-top:1px solid rgba(194,162,106,0.2)">
-    <div style="max-width:1180px;margin:0 auto;padding:56px 32px;display:flex;flex-wrap:wrap;gap:40px;justify-content:space-between;align-items:flex-start">
+    <div class="rsp-foot" style="max-width:1180px;margin:0 auto;padding:56px 32px;display:flex;flex-wrap:wrap;gap:40px;justify-content:space-between;align-items:flex-start">
       <div>
         <img src="./logo.png" alt="Souza Neto Advocacia" style="height:46px;width:auto;filter:brightness(0) invert(1);display:block;opacity:0.85">
       </div>
-      <div style="font-size:14.5px;line-height:1.8;text-align:right">
+      <div class="rsp-foot-right" style="font-size:14.5px;line-height:1.8;text-align:right">
         <div style="color:#dde3ea;font-weight:600">Dr. Antônio Barbosa de Souza Neto — OAB/MS 22.741</div>
         <div>Souza Neto Sociedade Individual de Advocacia — CNPJ 35.547.670/0001-07</div>
         <div>Rua Augusto Leite Figueiredo, 80, sala 13 — Campo Grande/MS</div>
