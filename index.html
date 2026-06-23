@@ -73,7 +73,7 @@
     .rsp-hero-grid{grid-template-columns:1fr!important;padding:48px 20px 60px!important;gap:0!important}
     .rsp-hero-grid h1{font-size:34px!important;line-height:1.1!important}
     .rsp-hero-grid p{font-size:16px!important}
-    .rsp-hero-img{min-height:300px!important;margin-top:36px!important}
+    .rsp-hero-img{min-height:230px!important;max-height:300px!important;margin-top:24px!important}
     .rsp-ctas{flex-direction:column!important;align-items:stretch!important}
     .rsp-ctas a{text-align:center!important}
     .rsp-stats{gap:18px!important}
@@ -81,6 +81,10 @@
     .rsp-3col{grid-template-columns:1fr!important}
     .rsp-3col-sm{grid-template-columns:1fr 1fr!important;gap:10px!important}
     .rsp-2col{grid-template-columns:1fr!important}
+    section > div{padding-top:56px!important;padding-bottom:56px!important;padding-left:20px!important;padding-right:20px!important}
+    header > div{padding-left:20px!important;padding-right:20px!important}
+    footer > div{padding-left:20px!important;padding-right:20px!important}
+    h2{font-size:29px!important;line-height:1.22!important}
   }
 </style>
 </head>
@@ -92,7 +96,7 @@
   <header style="position:sticky;top:0;z-index:50;background:rgba(14,28,46,0.96);backdrop-filter:blur(8px);border-bottom:1px solid rgba(194,162,106,0.22)">
     <div style="max-width:1180px;margin:0 auto;padding:16px 32px;display:flex;align-items:center;justify-content:space-between">
       <a href="#" style="display:block;line-height:0">
-        <img src="./logo.png" alt="Souza Neto Advocacia" style="height:38px;width:auto;filter:brightness(0) invert(1);display:block">
+        <img src="./logo.png" alt="Souza Neto Advocacia" style="height:62px;width:auto;filter:brightness(0) invert(1);display:block">
       </a>
       <nav class="rsp-nav-links" style="display:flex;align-items:center;gap:32px">
         <a href="#como-funciona" style="color:#cdd5df;text-decoration:none;font-size:14px;font-weight:500">Como funciona</a>
@@ -106,7 +110,7 @@
   <!-- HERO -->
   <section style="background:#0e1c2e;position:relative;color:#f6f4ef">
     <div style="position:absolute;inset:0;background:radial-gradient(1100px 520px at 80% -12%,rgba(194,162,106,0.16),transparent 60%)"></div>
-    <div class="rsp-hero-grid" style="max-width:1180px;margin:0 auto;padding:92px 32px 100px;position:relative;display:grid;grid-template-columns:1.05fr 0.95fr;gap:60px;align-items:stretch">
+    <div class="rsp-hero-grid" style="max-width:1180px;margin:0 auto;padding:92px 32px 100px;position:relative;display:grid;grid-template-columns:1.3fr 0.7fr;gap:54px;align-items:center">
       <div>
         <div style="display:inline-flex;align-items:center;gap:9px;border:1px solid rgba(194,162,106,0.4);border-radius:999px;padding:7px 16px;margin-bottom:28px">
           <span style="width:6px;height:6px;border-radius:50%;background:#c2a26a"></span>
@@ -133,7 +137,7 @@
           </div>
         </div>
       </div>
-      <div class="rsp-hero-img" style="position:relative;display:flex;flex-direction:column;min-height:480px">
+      <div class="rsp-hero-img" style="position:relative;display:flex;flex-direction:column;min-height:340px;max-height:430px">
         <img src="./foto-antonio.jpg" alt="Dr. Antônio B. de Souza Neto — Advogado OAB/MS 22.741" style="flex:1;width:100%;object-fit:cover;object-position:center 12%;border-radius:6px;display:block">
         <div style="position:absolute;bottom:-16px;left:-16px;background:#f6f4ef;color:#1c2430;padding:13px 17px;border-radius:5px;box-shadow:0 16px 40px rgba(0,0,0,0.32);max-width:206px">
           <div style="font-family:'Cormorant Garamond',serif;font-size:15.5px;font-weight:600;line-height:1.15">Dr. Antônio B. de Souza Neto</div>
@@ -382,11 +386,11 @@
   <footer style="background:#0a1626;color:#9aa4b2;border-top:1px solid rgba(194,162,106,0.2)">
     <div style="max-width:1180px;margin:0 auto;padding:56px 32px;display:flex;flex-wrap:wrap;gap:40px;justify-content:space-between;align-items:flex-start">
       <div>
-        <img src="./logo.png" alt="Souza Neto Advocacia" style="height:32px;width:auto;filter:brightness(0) invert(1);display:block;opacity:0.85">
-        <div style="font-size:10px;font-weight:600;letter-spacing:0.4em;text-transform:uppercase;color:#c2a26a;margin-top:5px">Sociedade Individual de Advocacia</div>
+        <img src="./logo.png" alt="Souza Neto Advocacia" style="height:46px;width:auto;filter:brightness(0) invert(1);display:block;opacity:0.85">
       </div>
       <div style="font-size:14.5px;line-height:1.8;text-align:right">
         <div style="color:#dde3ea;font-weight:600">Dr. Antônio Barbosa de Souza Neto — OAB/MS 22.741</div>
+        <div>Souza Neto Sociedade Individual de Advocacia — CNPJ 35.547.670/0001-07</div>
         <div>Rua Augusto Leite Figueiredo, 80, sala 13 — Campo Grande/MS</div>
         <div>contato@souzanetoadvocacia.com.br</div>
       </div>
