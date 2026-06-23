@@ -2,7 +2,9 @@
 // POST /api/create-charge
 // Body: { nome, email, doc, fone, tipo, situacao, outraNome, outraDoc, objeto, valores, condicoes }
 
-const ASAAS_URL = "https://api.asaas.com/api/v3";
+const ASAAS_URL = process.env.ASAAS_SANDBOX === "true"
+  ? "https://sandbox.asaas.com/api/v3"
+  : "https://api.asaas.com/api/v3";
 const CORS = {
   "Content-Type": "application/json",
   "Access-Control-Allow-Origin": "*",
