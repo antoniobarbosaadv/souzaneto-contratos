@@ -59,6 +59,22 @@
   *{margin:0;padding:0;box-sizing:border-box}
   body{background:#0e1c2e}
   html{scroll-behavior:smooth}
+  @media(max-width:768px){
+    .rsp-nav-links{display:none!important}
+    .rsp-hero-grid{grid-template-columns:1fr!important;padding:48px 20px 60px!important;gap:0!important}
+    .rsp-hero-grid h1{font-size:34px!important;line-height:1.1!important}
+    .rsp-hero-grid p{font-size:16px!important}
+    .rsp-hero-img{min-height:300px!important;margin-top:36px!important}
+    .rsp-ctas{flex-direction:column!important;align-items:stretch!important}
+    .rsp-ctas a{text-align:center!important}
+    .rsp-stats{gap:18px!important}
+    .rsp-trust{padding:14px 20px!important;font-size:12.5px!important;gap:10px 16px!important}
+    .rsp-3col{grid-template-columns:1fr!important}
+    .rsp-3col-sm{grid-template-columns:1fr 1fr!important;gap:10px!important}
+    .rsp-2col{grid-template-columns:1fr!important}
+    .rsp-form-box{padding:24px 18px!important}
+    .rsp-pad{padding-left:20px!important;padding-right:20px!important;padding-top:60px!important;padding-bottom:60px!important}
+  }
 </style>
 <script src="./image-slot.js"></script>
 </helmet>
@@ -68,11 +84,10 @@
   <!-- NAV -->
   <header style="position:sticky;top:0;z-index:50;background:rgba(14,28,46,0.96);backdrop-filter:blur(8px);border-bottom:1px solid rgba(194,162,106,0.22)">
     <div style="max-width:1180px;margin:0 auto;padding:16px 32px;display:flex;align-items:center;justify-content:space-between">
-      <div style="display:flex;flex-direction:column;line-height:1.05">
-        <span style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:#f6f4ef;letter-spacing:0.06em">SOUZA NETO</span>
-        <span style="font-size:9.5px;font-weight:600;letter-spacing:0.42em;text-transform:uppercase;color:#c2a26a;padding-left:2px">Advocacia</span>
+      <div>
+        <img src="./logo.png" alt="Souza Neto Advocacia" style="height:38px;width:auto;filter:brightness(0) invert(1);display:block">
       </div>
-      <nav style="display:flex;align-items:center;gap:32px">
+      <nav class="rsp-nav-links" style="display:flex;align-items:center;gap:32px">
         <a href="#como-funciona" style="color:#cdd5df;text-decoration:none;font-size:14px;font-weight:500" style-hover="color:#ffffff">Como funciona</a>
         <a href="#contratos" style="color:#cdd5df;text-decoration:none;font-size:14px;font-weight:500" style-hover="color:#ffffff">Contratos</a>
         <a href="#faq" style="color:#cdd5df;text-decoration:none;font-size:14px;font-weight:500" style-hover="color:#ffffff">Dúvidas</a>
@@ -84,7 +99,7 @@
   <!-- HERO -->
   <section style="background:#0e1c2e;position:relative;color:#f6f4ef">
     <div style="position:absolute;inset:0;background:radial-gradient(1100px 520px at 80% -12%,rgba(194,162,106,0.16),transparent 60%)"></div>
-    <div style="max-width:1180px;margin:0 auto;padding:92px 32px 100px;position:relative;display:grid;grid-template-columns:1.05fr 0.95fr;gap:60px;align-items:stretch">
+    <div class="rsp-hero-grid" style="max-width:1180px;margin:0 auto;padding:92px 32px 100px;position:relative;display:grid;grid-template-columns:1.05fr 0.95fr;gap:60px;align-items:stretch">
       <div>
         <div style="display:inline-flex;align-items:center;gap:9px;border:1px solid rgba(194,162,106,0.4);border-radius:999px;padding:7px 16px;margin-bottom:28px">
           <span style="width:6px;height:6px;border-radius:50%;background:#c2a26a"></span>
@@ -92,11 +107,11 @@
         </div>
         <h1 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:60px;line-height:1.04;letter-spacing:-0.01em;color:#ffffff;text-wrap:balance">Seu contrato feito por advogado. Sem complicação.</h1>
         <p style="margin-top:24px;font-size:18px;line-height:1.6;color:#c5cdd8;max-width:520px">Contratos personalizados para proteger o que é seu — elaborados por advogado especialista, entregues em até 24 horas.</p>
-        <div style="margin-top:36px;display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+        <div class="rsp-ctas" style="margin-top:36px;display:flex;align-items:center;gap:20px;flex-wrap:wrap">
           <a href="#contratar" style="background:#c2a26a;color:#0e1c2e;text-decoration:none;font-size:16px;font-weight:700;padding:17px 34px;border-radius:4px;letter-spacing:0.01em;box-shadow:0 10px 30px rgba(194,162,106,0.25)" style-hover="background:#d4b67e">Contratar agora</a>
           <a href="#faq" style="color:#dde3ea;text-decoration:none;font-size:15px;font-weight:600;padding:16px 22px;border:1px solid rgba(255,255,255,0.2);border-radius:4px" style-hover="border-color:#c2a26a">Ver dúvidas frequentes</a>
         </div>
-        <div style="margin-top:38px;display:flex;gap:30px;flex-wrap:wrap">
+        <div class="rsp-stats" style="margin-top:38px;display:flex;gap:30px;flex-wrap:wrap">
           <div style="display:flex;align-items:baseline;gap:9px">
             <span style="font-family:'Cormorant Garamond',serif;font-size:30px;color:#c2a26a;line-height:1">24h</span>
             <span style="font-size:13px;color:#aab4c1;line-height:1.3">de prazo de<br>entrega</span>
@@ -111,8 +126,8 @@
           </div>
         </div>
       </div>
-      <div style="position:relative;display:flex;flex-direction:column;min-height:560px">
-        <img src="./foto-antonio.jpg" alt="Dr. Antônio B. de Souza Neto — Advogado OAB/MS 22.741" style="flex:1;width:100%;object-fit:cover;object-position:center top;border-radius:6px;display:block">
+      <div class="rsp-hero-img" style="position:relative;display:flex;flex-direction:column;min-height:480px">
+        <img src="./foto-antonio.jpg" alt="Dr. Antônio B. de Souza Neto — Advogado OAB/MS 22.741" style="flex:1;width:100%;object-fit:cover;object-position:center 12%;border-radius:6px;display:block">
         <div style="position:absolute;bottom:-16px;left:-16px;background:#f6f4ef;color:#1c2430;padding:13px 17px;border-radius:5px;box-shadow:0 16px 40px rgba(0,0,0,0.32);max-width:206px">
           <div style="font-family:'Cormorant Garamond',serif;font-size:15.5px;font-weight:600;line-height:1.15">Dr. Antônio B. de Souza Neto</div>
           <div style="font-size:11px;color:#5a6472;margin-top:3px;letter-spacing:0.04em">Advogado · OAB/MS 22.741</div>
@@ -123,7 +138,7 @@
 
   <!-- TRUST BAR -->
   <section style="background:#0a1626;border-top:1px solid rgba(255,255,255,0.06);color:#9aa4b2">
-    <div style="max-width:1180px;margin:0 auto;padding:22px 32px;display:flex;flex-wrap:wrap;gap:18px 40px;justify-content:center;align-items:center;font-size:14px;font-weight:500">
+    <div class="rsp-trust" style="max-width:1180px;margin:0 auto;padding:22px 32px;display:flex;flex-wrap:wrap;gap:18px 40px;justify-content:center;align-items:center;font-size:14px;font-weight:500">
       <span style="display:flex;align-items:center;gap:9px"><span style="color:#c2a26a">●</span> Advogado registrado na OAB/MS</span>
       <span style="display:flex;align-items:center;gap:9px"><span style="color:#c2a26a">●</span> Assinatura digital com validade jurídica</span>
       <span style="display:flex;align-items:center;gap:9px"><span style="color:#c2a26a">●</span> Pagamento em cartão ou Pix</span>
@@ -147,7 +162,7 @@
         <span style="font-size:12px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:#c2a26a">Como funciona</span>
         <h2 style="margin-top:16px;font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:600;color:#ffffff">Três passos. Sem burocracia.</h2>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:30px">
+      <div class="rsp-3col" style="display:grid;grid-template-columns:repeat(3,1fr);gap:30px">
         <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(194,162,106,0.18);border-radius:6px;padding:38px 34px">
           <div style="font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:600;color:#c2a26a;line-height:1">01</div>
           <h3 style="margin-top:18px;font-size:21px;font-weight:700;color:#ffffff">Você preenche e contrata</h3>
@@ -177,7 +192,7 @@
         <span style="font-size:12px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:#c2a26a">Tipos de contrato</span>
         <h2 style="margin-top:16px;font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:600;color:#1c2430">Qualquer contrato que você precisar.</h2>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
+      <div class="rsp-3col-sm" style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px">
         <sc-for list="{{ contratos }}" as="tipo" hint-placeholder-count="14">
           <div style="display:flex;align-items:center;gap:14px;background:#ffffff;border:1px solid #e6e1d6;border-radius:5px;padding:18px 20px" style-hover="border-color:#c2a26a">
             <span style="flex:none;width:8px;height:8px;border-radius:50%;background:#c2a26a"></span>
@@ -196,7 +211,7 @@
         <span style="font-size:12px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:#c2a26a">O que está incluído</span>
         <h2 style="margin-top:16px;font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:600;color:#ffffff">Tudo claro, desde o início.</h2>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px">
+      <div class="rsp-2col" style="display:grid;grid-template-columns:1fr 1fr;gap:28px">
         <div style="background:rgba(194,162,106,0.07);border:1px solid rgba(194,162,106,0.3);border-radius:8px;padding:40px">
           <h3 style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:#c2a26a;margin-bottom:24px">Incluído</h3>
           <ul style="list-style:none;display:flex;flex-direction:column;gap:18px">
@@ -231,7 +246,7 @@
         <h2 style="margin-top:16px;font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:600;color:#ffffff;text-wrap:balance">Regras claras, do começo ao fim.</h2>
         <p style="margin:18px auto 0;font-size:17px;line-height:1.6;color:#c5cdd8;max-width:680px">Para entregar rápido e com qualidade, o processo segue regras simples. Vale a pena ler antes de contratar.</p>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
+      <div class="rsp-3col" style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px">
         <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(194,162,106,0.22);border-radius:8px;padding:32px 30px">
           <div style="font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:600;color:#c2a26a;line-height:1">24h</div>
           <h3 style="margin-top:14px;font-size:17px;font-weight:700;color:#ffffff">A contar da documentação completa</h3>
@@ -285,7 +300,7 @@
         <div style="height:100%;background:#c2a26a;border-radius:99px;width:{{ progressPct }};transition:width .3s ease"></div>
       </div>
 
-      <div style="background:#ffffff;border:1px solid #e6e1d6;border-radius:10px;padding:38px 36px;box-shadow:0 14px 40px rgba(14,28,46,0.06)">
+      <div class="rsp-form-box" style="background:#ffffff;border:1px solid #e6e1d6;border-radius:10px;padding:38px 36px;box-shadow:0 14px 40px rgba(14,28,46,0.06)">
 
         <!-- STEP 1 -->
         <sc-if value="{{ isStep1 }}" hint-placeholder-val="{{ true }}">
@@ -314,7 +329,7 @@
           <div>
             <h3 style="font-family:'Cormorant Garamond',serif;font-size:25px;font-weight:600;color:#1c2430">Seus dados</h3>
             <p style="font-size:14.5px;color:#6a7280;margin:6px 0 24px">Para identificar você no contrato e entrar em contato.</p>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
+            <div class="rsp-2col" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
               <div>
                 <label style="display:block;font-size:13px;font-weight:600;color:#2a323e;margin-bottom:7px">Nome completo</label>
                 <input name="nome" value="{{ form.nome }}" onChange="{{ onField }}" placeholder="Seu nome" style="width:100%;padding:13px 15px;border:1px solid #d8d2c4;border-radius:5px;font-size:15px;font-family:inherit;background:#fff;color:#1c2430;outline:none">
@@ -324,7 +339,7 @@
                 <input name="doc" value="{{ form.doc }}" onChange="{{ onField }}" placeholder="000.000.000-00" style="width:100%;padding:13px 15px;border:1px solid #d8d2c4;border-radius:5px;font-size:15px;font-family:inherit;background:#fff;color:#1c2430;outline:none">
               </div>
             </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+            <div class="rsp-2col" style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
               <div>
                 <label style="display:block;font-size:13px;font-weight:600;color:#2a323e;margin-bottom:7px">E-mail</label>
                 <input name="email" type="email" value="{{ form.email }}" onChange="{{ onField }}" placeholder="voce@email.com" style="width:100%;padding:13px 15px;border:1px solid #d8d2c4;border-radius:5px;font-size:15px;font-family:inherit;background:#fff;color:#1c2430;outline:none">
@@ -342,7 +357,7 @@
           <div>
             <h3 style="font-family:'Cormorant Garamond',serif;font-size:25px;font-weight:600;color:#1c2430">A outra parte</h3>
             <p style="font-size:14.5px;color:#6a7280;margin:6px 0 24px">Quem vai assinar o contrato com você. Preencha o que já souber.</p>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+            <div class="rsp-2col" style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
               <div>
                 <label style="display:block;font-size:13px;font-weight:600;color:#2a323e;margin-bottom:7px">Nome / razão social</label>
                 <input name="outraNome" value="{{ form.outraNome }}" onChange="{{ onField }}" placeholder="Nome da outra parte" style="width:100%;padding:13px 15px;border:1px solid #d8d2c4;border-radius:5px;font-size:15px;font-family:inherit;background:#fff;color:#1c2430;outline:none">
@@ -390,8 +405,7 @@
               </ul>
             </div>
             <div style="margin-top:18px;display:flex;gap:12px;flex-wrap:wrap">
-              <a href="{{ whatsappUrl }}" target="_blank" rel="noopener" style="background:#c2a26a;color:#0e1c2e;text-decoration:none;font-size:15px;font-weight:700;padding:13px 22px;border-radius:5px" style-hover="background:#d4b67e">Enviar por WhatsApp</a>
-              <a href="{{ docsEmailUrl }}" style="color:#1c2430;text-decoration:none;font-size:15px;font-weight:600;padding:12px 22px;border:1px solid #d2ccbd;border-radius:5px" style-hover="border-color:#c2a26a">Enviar por e-mail</a>
+              <a href="{{ docsEmailUrl }}" style="background:#c2a26a;color:#0e1c2e;text-decoration:none;font-size:15px;font-weight:700;padding:13px 22px;border-radius:5px" style-hover="background:#d4b67e">Enviar documentos por e-mail</a>
             </div>
             <label style="display:flex;gap:11px;align-items:flex-start;margin-top:22px;cursor:pointer">
               <input type="checkbox" checked="{{ docsLater }}" onChange="{{ onDocsLater }}" style="margin-top:3px;width:17px;height:17px;accent-color:#c2a26a">
@@ -421,11 +435,14 @@
                 <span style="font-size:14.5px;color:#2a323e;font-weight:600">Li e aceito os prazos e condições acima.</span>
               </label>
             </div>
-            <button onClick="{{ submit }}" disabled="{{ submitDisabled }}" style="margin-top:20px;width:100%;background:#c2a26a;color:#0e1c2e;border:none;padding:17px;border-radius:5px;font-size:16px;font-weight:700;cursor:pointer" style-hover="background:#d4b67e">Enviar respostas e ir para o pagamento →</button>
+            <button onClick="{{ submit }}" disabled="{{ submitDisabled }}" style="margin-top:20px;width:100%;background:#c2a26a;color:#0e1c2e;border:none;padding:17px;border-radius:5px;font-size:16px;font-weight:700;cursor:pointer" style-hover="background:#d4b67e">{{ submitLabel }}</button>
+            <sc-if value="{{ error }}" hint-placeholder-val="{{ false }}">
+              <p style="margin:10px 0 0;text-align:center;font-size:13px;color:#9a3b2e">{{ error }}</p>
+            </sc-if>
             <sc-if value="{{ showTermsHint }}" hint-placeholder-val="{{ false }}">
               <p style="margin:10px 0 0;text-align:center;font-size:12.5px;color:#9a3b2e">Marque a caixa acima para continuar.</p>
             </sc-if>
-            <p style="margin:12px 0 0;text-align:center;font-size:12.5px;color:#8a8270;line-height:1.5">Suas respostas serão enviadas ao advogado por WhatsApp e, em seguida, você vai para o pagamento.</p>
+            <p style="margin:12px 0 0;text-align:center;font-size:12.5px;color:#8a8270;line-height:1.5">Após confirmar, você será direcionado para o pagamento seguro. Só após o pagamento confirmado você poderá agendar a reunião.</p>
           </div>
         </sc-if>
 
@@ -441,7 +458,7 @@
 
       </div>
 
-      <p style="margin-top:22px;text-align:center;font-size:13.5px;color:#8a8270">Prefere conversar antes? <a href="{{ whatsappUrl }}" target="_blank" rel="noopener" style="color:#a8884f;text-decoration:none;font-weight:600;border-bottom:1px solid rgba(168,136,79,0.4)">Fale no WhatsApp</a></p>
+      <p style="margin-top:22px;text-align:center;font-size:13.5px;color:#8a8270">Dúvidas? Veja as <a href="#faq" style="color:#a8884f;text-decoration:none;font-weight:600;border-bottom:1px solid rgba(168,136,79,0.4)">perguntas frequentes</a> ou escreva para <a href="mailto:contato@souzanetoadvocacia.com.br" style="color:#a8884f;text-decoration:none;font-weight:600">contato@souzanetoadvocacia.com.br</a></p>
     </div>
   </section>
 
@@ -519,7 +536,7 @@
       <h2 style="font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:600;color:#ffffff;line-height:1.2;text-wrap:balance">Proteja o que é seu com um contrato feito do jeito certo.</h2>
       <div style="margin-top:32px;display:flex;gap:18px;justify-content:center;flex-wrap:wrap">
         <a href="#contratar" style="background:#c2a26a;color:#0e1c2e;text-decoration:none;font-size:16px;font-weight:700;padding:17px 38px;border-radius:4px" style-hover="background:#d4b67e">Contratar agora</a>
-        <a href="{{ whatsappUrl }}" target="_blank" style="color:#dde3ea;text-decoration:none;font-size:15px;font-weight:600;padding:16px 30px;border:1px solid rgba(255,255,255,0.22);border-radius:4px" style-hover="border-color:#c2a26a">Falar no WhatsApp</a>
+        <a href="mailto:contato@souzanetoadvocacia.com.br" style="color:#dde3ea;text-decoration:none;font-size:15px;font-weight:600;padding:16px 30px;border:1px solid rgba(255,255,255,0.22);border-radius:4px" style-hover="border-color:#c2a26a">Falar no WhatsApp</a>
       </div>
     </div>
   </section>
@@ -528,8 +545,8 @@
   <footer style="background:#0a1626;color:#9aa4b2;border-top:1px solid rgba(194,162,106,0.2)">
     <div style="max-width:1180px;margin:0 auto;padding:56px 32px;display:flex;flex-wrap:wrap;gap:40px;justify-content:space-between;align-items:flex-start">
       <div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:#f6f4ef;letter-spacing:0.05em">SOUZA NETO</div>
-        <div style="font-size:10px;font-weight:600;letter-spacing:0.4em;text-transform:uppercase;color:#c2a26a;margin-top:3px">Sociedade Individual de Advocacia</div>
+        <img src="./logo.png" alt="Souza Neto Advocacia" style="height:32px;width:auto;filter:brightness(0) invert(1);display:block;opacity:0.85">
+        <div style="font-size:10px;font-weight:600;letter-spacing:0.4em;text-transform:uppercase;color:#c2a26a;margin-top:5px">Sociedade Individual de Advocacia</div>
       </div>
       <div style="font-size:14.5px;line-height:1.8;text-align:right">
         <div style="color:#dde3ea;font-weight:600">Dr. Antônio Barbosa de Souza Neto — OAB/MS 22.741</div>
@@ -542,8 +559,6 @@
     </div>
   </footer>
 
-  <!-- WHATSAPP FLOAT -->
-  <a href="{{ whatsappUrl }}" target="_blank" aria-label="Falar no WhatsApp" style="position:fixed;bottom:26px;right:26px;z-index:60;background:#c2a26a;color:#0e1c2e;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,0.3);font-weight:800;font-size:13px;text-decoration:none" style-hover="background:#d4b67e">Fale</a>
 
 </div>
 </x-dc>
@@ -557,7 +572,9 @@ class Component extends DCLogic {
     step: 1,
     form: { tipo: "", situacao: "", nome: "", doc: "", email: "", fone: "", outraNome: "", outraDoc: "", objeto: "", valores: "", condicoes: "" },
     docsLater: false,
-    terms: false
+    terms: false,
+    submitting: false,
+    error: ""
   };
 
   TOTAL = 6;
@@ -571,42 +588,26 @@ class Component extends DCLogic {
   onDocsLater = (e) => this.setState({ docsLater: e.target.checked });
   onTerms = (e) => this.setState({ terms: e.target.checked });
 
-  buildSummary() {
-    const f = this.state.form;
-    return [
-      "*Solicitacao de contrato - Souza Neto Advocacia*",
-      "",
-      "Tipo de contrato: " + (f.tipo || "(a definir)"),
-      f.situacao ? "Situacao: " + f.situacao : "",
-      "",
-      "MEUS DADOS",
-      "Nome: " + (f.nome || "-"),
-      "CPF/CNPJ: " + (f.doc || "-"),
-      "E-mail: " + (f.email || "-"),
-      "Telefone: " + (f.fone || "-"),
-      "",
-      "OUTRA PARTE",
-      "Nome: " + (f.outraNome || "-"),
-      "CPF/CNPJ: " + (f.outraDoc || "-"),
-      "",
-      "O COMBINADO",
-      "Objeto: " + (f.objeto || "-"),
-      "Valores: " + (f.valores || "-"),
-      "Prazos/condicoes: " + (f.condicoes || "-"),
-      "",
-      "Documentos: " + (this.state.docsLater ? "vou enviar antes da reuniao" : "envio em seguida")
-    ].filter(Boolean).join("\n");
-  }
-
-  submit = () => {
-    if (!this.state.terms) return;
-    const wa = (this.props.whatsappUrl ?? "https://wa.me/5567999743340").split("?")[0];
-    window.open(wa + "?text=" + encodeURIComponent(this.buildSummary()), "_blank");
-    const email = this.state.form.email || "";
-    if (email) sessionStorage.setItem("sn_email", email);
-    const checkout = this.props.checkoutUrl ?? "https://www.asaas.com/c/0jlyhzfzcoznlc8b";
-    if (checkout && checkout !== "#") window.open(checkout, "_blank");
-    setTimeout(() => { window.location.href = "https://contrato.souzanetoadvocacia.com.br/obrigado.html"; }, 800);
+  submit = async () => {
+    if (!this.state.terms || this.state.submitting) return;
+    this.setState({ submitting: true, error: "" });
+    try {
+      const res = await fetch("/api/create-charge", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(this.state.form)
+      });
+      const data = await res.json();
+      if (!data.ok || !data.chargeId) {
+        this.setState({ submitting: false, error: "Erro ao processar. Tente novamente ou entre em contato por e-mail." });
+        return;
+      }
+      localStorage.setItem("sn_charge_id", data.chargeId);
+      window.open(data.paymentUrl, "_blank");
+      setTimeout(() => { window.location.href = "https://contrato.souzanetoadvocacia.com.br/obrigado.html"; }, 600);
+    } catch (e) {
+      this.setState({ submitting: false, error: "Falha de conexão. Verifique sua internet e tente novamente." });
+    }
   };
 
   renderVals() {
@@ -614,8 +615,10 @@ class Component extends DCLogic {
     return {
       checkoutUrl: this.props.checkoutUrl ?? "https://www.asaas.com/c/0jlyhzfzcoznlc8b",
       scheduleUrl: this.props.scheduleUrl ?? "https://cal.read.ai/contratos-sn/30-min",
-      whatsappUrl: this.props.whatsappUrl ?? "https://wa.me/5567999743340",
       docsEmailUrl: "mailto:contato@souzanetoadvocacia.com.br?subject=Documentos%20do%20meu%20contrato",
+      submitting: this.state.submitting,
+      error: this.state.error,
+      submitLabel: this.state.submitting ? "Processando..." : "Continuar para o pagamento →",
       form: this.state.form,
       step: step,
       stepLabel: "Passo " + step + " de 6",
@@ -669,7 +672,7 @@ class Component extends DCLogic {
       faqs: [
         { q: "Preciso ir até o escritório?", a: "Não. Todo o atendimento é online: você contrata, conversa com o advogado por vídeo e recebe o contrato com assinatura digital, de onde estiver." },
         { q: "Em quanto tempo recebo meu contrato?", a: "Em até 24 horas a partir do momento em que recebermos toda a documentação e informações necessárias e realizarmos a reunião. Você tem até 15 dias após o pagamento para enviar tudo, e ainda conta com até 2 rodadas de revisão." },
-        { q: "E se eu não tiver os documentos agora?", a: "Sem problema. Você preenche o formulário com o que tiver e envia o restante (matrícula, RG, etc.) por WhatsApp ou e-mail antes da reunião. O prazo de 24h só começa a contar quando recebermos toda a documentação." },
+        { q: "E se eu não tiver os documentos agora?", a: "Sem problema. Você preenche o formulário com o que tiver e envia o restante (matrícula, RG, etc.) por e-mail antes da reunião. O prazo de 24h só começa a contar quando recebermos toda a documentação." },
         { q: "O valor é reembolsável?", a: "O pagamento garante a elaboração do seu contrato. Caso você não envie a documentação necessária dentro do prazo de 15 dias, os valores não são devolvidos. Todo o trabalho, incluindo as até 2 revisões, é concluído em até 30 dias a partir do pagamento; após esse prazo o contrato é encerrado e novas revisões ou alterações exigem nova contratação." },
         { q: "O contrato tem validade jurídica?", a: "Sim. É elaborado por advogado inscrito na OAB/MS e assinado digitalmente, com plena validade jurídica conforme a legislação brasileira." },
         { q: "Como funciona o pagamento?", a: "À vista por R$ 989,00 ou em até 10x de R$ 98,90 sem juros, no cartão de crédito ou via Pix. O pagamento é feito online, com segurança." },
