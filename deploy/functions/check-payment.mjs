@@ -1,7 +1,9 @@
 // Netlify Function: verifica status de pagamento diretamente na API do Asaas
 // GET /api/check-payment?cid=CHARGE_ID
 
-const ASAAS_URL = "https://api.asaas.com/api/v3";
+const ASAAS_URL = process.env.ASAAS_SANDBOX === "true"
+  ? "https://sandbox.asaas.com/api/v3"
+  : "https://api.asaas.com/api/v3";
 const PAID_STATUSES = ["CONFIRMED", "RECEIVED", "RECEIVED_IN_CASH"];
 const CORS = {
   "Content-Type": "application/json",
