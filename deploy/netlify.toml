@@ -1,0 +1,12 @@
+[build]
+  publish = "."
+  functions = "functions"
+
+[functions]
+  node_bundler = "esbuild"
+
+[[headers]]
+  for = "/api/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, POST, OPTIONS"
