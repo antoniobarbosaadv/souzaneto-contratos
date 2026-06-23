@@ -1,14 +1,26 @@
 // Netlify Function: cria cliente + cobrança individual no Asaas
 // POST /api/create-charge
-// Body: { nome, email, doc, fone, tipo, situacao, outraNome, outraDoc, objeto, valores, condicoes }
 
 const ASAAS_URL = process.env.ASAAS_SANDBOX === "true"
   ? "https://sandbox.asaas.com/api/v3"
   : "https://api.asaas.com/api/v3";
+
 const CORS = {
   "Content-Type": "application/json",
   "Access-Control-Allow-Origin": "*",
 };
+
+async function asaas(method, path, body, apiKey) {
+  const res = await fetch(`${ASAAS_URL}${path}`, {
+    method,
+    headers: { "Content-Type": "application/json", "access_token": apiKey },
+    body: body ? JSON.stringify(body) : undefined,
+  });
+  const text = await res.text();
+  console.log(`Asaas ${method} ${path} → ${res.status}:`, text.slice(0, 300));
+  try { return { status: res.status, data: JSON.parse(text) }; }
+  catch (_) { return { status: res.status, data: null, raw: text }; }
+}
 
 export default async (request) => {
   if (request.method === "OPTIONS") return new Response("ok", { status: 200, headers: CORS });
@@ -17,38 +29,34 @@ export default async (request) => {
   const apiKey = process.env.ASAAS_API_KEY;
   if (!apiKey) return new Response(JSON.stringify({ error: "API key não configurada" }), { status: 500, headers: CORS });
 
-  const headers = { "Content-Type": "application/json", "access_token": apiKey };
+  let body;
+  try { body = await request.json(); }
+  catch (_) { return new Response(JSON.stringify({ error: "Body inválido" }), { status: 400, headers: CORS }); }
+
+  const { nome, email, doc, fone, tipo, situacao, outraNome, outraDoc, objeto, valores, condicoes } = body;
+  const cpfCnpj = (doc || "").replace(/\D/g, "");
+  const phone   = (fone || "").replace(/\D/g, "");
 
   try {
-    const body = await request.json();
-    const { nome, email, doc, fone, tipo, situacao, outraNome, outraDoc, objeto, valores, condicoes } = body;
-
-    const cpfCnpj = (doc || "").replace(/\D/g, "");
-    const phone   = (fone || "").replace(/\D/g, "");
-
-    // 1. Criar ou buscar cliente
+    // 1. Criar cliente
     let customerId;
-    const custRes = await fetch(`${ASAAS_URL}/customers`, {
-      method: "POST",
-      headers,
-      body: JSON.stringify({ name: nome, email, cpfCnpj, mobilePhone: phone, notificationDisabled: false }),
-    });
-    const custData = await custRes.json();
+    const cust = await asaas("POST", "/customers", {
+      name: nome || "Cliente", email, cpfCnpj, mobilePhone: phone, notificationDisabled: false
+    }, apiKey);
 
-    if (custData.id) {
-      customerId = custData.id;
-    } else {
+    if (cust.data?.id) {
+      customerId = cust.data.id;
+    } else if (cpfCnpj) {
       // Cliente já existe — buscar por CPF/CNPJ
-      const search = await fetch(`${ASAAS_URL}/customers?cpfCnpj=${cpfCnpj}`, { headers });
-      const searchData = await search.json();
-      customerId = searchData.data?.[0]?.id;
+      const search = await asaas("GET", `/customers?cpfCnpj=${cpfCnpj}`, null, apiKey);
+      customerId = search.data?.data?.[0]?.id;
     }
 
     if (!customerId) {
-      return new Response(JSON.stringify({ error: "Não foi possível criar o cliente no Asaas." }), { status: 500, headers: CORS });
+      return new Response(JSON.stringify({ error: "Não foi possível criar o cliente no Asaas.", detail: cust.raw || cust.data }), { status: 500, headers: CORS });
     }
 
-    // 2. Montar descrição com dados do contrato
+    // 2. Descrição
     const desc = [
       `Contrato: ${tipo || "a definir"}`,
       situacao  ? `Situação: ${situacao}` : null,
@@ -58,39 +66,34 @@ export default async (request) => {
       condicoes ? `Condições: ${condicoes}` : null,
     ].filter(Boolean).join(" | ");
 
-    // 3. Data de vencimento: amanhã
+    // 3. Vencimento: amanhã
     const due = new Date();
     due.setDate(due.getDate() + 1);
     const dueDate = due.toISOString().split("T")[0];
 
     // 4. Criar cobrança
-    const payRes = await fetch(`${ASAAS_URL}/payments`, {
-      method: "POST",
-      headers,
-      body: JSON.stringify({
-        customer: customerId,
-        billingType: "UNDEFINED",
-        value: 989.00,
-        dueDate,
-        description: desc,
-        externalReference: email,
-        callback: {
-          successUrl: "https://contrato.souzanetoadvocacia.com.br/obrigado.html",
-          autoRedirect: true,
-        },
-      }),
-    });
-    const payData = await payRes.json();
+    const pay = await asaas("POST", "/payments", {
+      customer: customerId,
+      billingType: "UNDEFINED",
+      value: 1.00, // TESTE — voltar para 989.00 após validar
+      dueDate,
+      description: desc,
+      externalReference: email,
+      callback: {
+        successUrl: "https://contrato.souzanetoadvocacia.com.br/obrigado.html",
+        autoRedirect: true,
+      },
+    }, apiKey);
 
-    if (!payData.id) {
-      return new Response(JSON.stringify({ error: "Erro ao criar cobrança.", detail: payData }), { status: 500, headers: CORS });
+    if (!pay.data?.id) {
+      return new Response(JSON.stringify({ error: "Erro ao criar cobrança.", detail: pay.raw || pay.data }), { status: 500, headers: CORS });
     }
 
-    return new Response(JSON.stringify({ ok: true, chargeId: payData.id, paymentUrl: payData.invoiceUrl }), { status: 200, headers: CORS });
+    return new Response(JSON.stringify({ ok: true, chargeId: pay.data.id, paymentUrl: pay.data.invoiceUrl }), { status: 200, headers: CORS });
 
   } catch (err) {
     console.error("create-charge error:", err);
-    return new Response(JSON.stringify({ error: "Erro interno." }), { status: 500, headers: CORS });
+    return new Response(JSON.stringify({ error: "Erro interno.", detail: err.message }), { status: 500, headers: CORS });
   }
 };
 
