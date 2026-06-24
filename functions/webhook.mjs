@@ -24,6 +24,10 @@
 //                        Padrão: "Souza Neto Advocacia <contato@souzanetoadvocacia.com.br>"
 //   MAIL_BCC             (opcional) cópia oculta p/ você receber aviso de cada venda
 //   ASAAS_WEBHOOK_TOKEN  (opcional) mesmo token configurado no webhook do Asaas
+//   ADS_HOOK_URL         (opcional) URL do "catch hook" do conector (Zapier/Make)
+//                        que registra a conversão no Google Ads. Quando definida,
+//                        esta função repassa { email, value } ao conector assim
+//                        que o pagamento confirma — conversão só de venda paga.
 // ============================================================================
 
 const ASAAS_URL = "https://api.asaas.com/api/v3";
@@ -171,6 +175,33 @@ async function sendEmail(to, name) {
   console.log("E-mail enviado para", to, "→", out.slice(0, 120));
 }
 
+// Repassa a venda confirmada para o conector (Zapier/Make), que registra a
+// conversão no Google Ads usando o e-mail do cliente (Enhanced Conversions for
+// Leads). Best-effort: se falhar, apenas registra no log — não afeta o e-mail
+// nem faz o Asaas retentar (a conversão não deve bloquear a orientação ao cliente).
+async function forwardToAds({ email, name, value, paymentId, event }) {
+  const url = process.env.ADS_HOOK_URL;
+  if (!url) return; // conector ainda não configurado
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email,
+        name: name || "",
+        value: typeof value === "number" ? value : Number(value) || 0,
+        currency: "BRL",
+        conversion: "compra_989",
+        order_id: paymentId,
+        event,
+      }),
+    });
+    console.log("Ads hook →", res.status);
+  } catch (e) {
+    console.warn("Falha ao repassar conversão ao conector (ignorado):", e?.message);
+  }
+}
+
 export default async (request) => {
   if (request.method !== "POST") return new Response("ok", { status: 200 });
 
@@ -226,6 +257,16 @@ export default async (request) => {
   }
 
   await markEmailed(store, payment.id);
+
+  // Registra a conversão paga no Google Ads (via conector), se configurado.
+  await forwardToAds({
+    email,
+    name,
+    value: payment?.value,
+    paymentId: payment.id,
+    event,
+  });
+
   return new Response("OK", { status: 200 });
 };
 
