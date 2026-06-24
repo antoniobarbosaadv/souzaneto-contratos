@@ -104,7 +104,9 @@ Qualquer dúvida, é só responder este e-mail ou escrever para contato@souzanet
 Souza Neto Advocacia`;
 
   const html = `<!DOCTYPE html><html lang="pt-BR"><body style="margin:0;background:#0e1c2e;font-family:Arial,Helvetica,sans-serif;color:#f6f4ef">
-  <div style="max-width:560px;margin:0 auto;padding:36px 28px">
+  <div style="max-width:560px;margin:0 auto;background:#0e1c2e">
+    <div style="background:#f6f4ef;text-align:center;padding:22px 0"><img src="https://contrato.souzanetoadvocacia.com.br/logo.png" alt="Souza Neto Advocacia" width="190" style="display:inline-block;width:190px;max-width:72%;height:auto"></div>
+    <div style="padding:34px 28px">
     <p style="font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#c2a26a;font-weight:bold;margin:0 0 18px">Pagamento confirmado</p>
     <h1 style="font-size:26px;color:#ffffff;margin:0 0 14px">${ola} Faltam só 2 passos.</h1>
     <p style="font-size:15px;line-height:1.6;color:#c5cdd8;margin:0 0 26px">Seu pagamento foi confirmado — obrigado! Para o advogado chegar à reunião com tudo em mãos, conclua os dois passos abaixo. Leva poucos minutos.</p>
@@ -123,7 +125,8 @@ Souza Neto Advocacia`;
       </td></tr>
     </table>
     <p style="font-size:13px;line-height:1.6;color:#8a8270;margin:0">Você tem até <strong style="color:#aeb8c4">15 dias</strong> para enviar tudo. Dúvidas? Responda este e-mail ou escreva para <a href="mailto:contato@souzanetoadvocacia.com.br" style="color:#c2a26a">contato@souzanetoadvocacia.com.br</a>.</p>
-    <p style="font-size:12px;color:#5a6472;margin:22px 0 0">© Souza Neto Sociedade Individual de Advocacia · OAB/MS 22.741</p>
+    <p style="font-size:12px;color:#5a6472;margin:24px 0 0">© 2026 Souza Neto Sociedade Individual de Advocacia · CNPJ 35.547.670/0001-07 · Dr. Antônio Barbosa de Souza Neto — OAB/MS 22.741</p>
+    </div>
   </div></body></html>`;
   return { text, html };
 }
@@ -144,7 +147,9 @@ Qualquer dúvida, é só responder este e-mail ou escrever para contato@souzanet
 Souza Neto Advocacia`;
 
   const html = `<!DOCTYPE html><html lang="pt-BR"><body style="margin:0;background:#0e1c2e;font-family:Arial,Helvetica,sans-serif;color:#f6f4ef">
-  <div style="max-width:560px;margin:0 auto;padding:36px 28px">
+  <div style="max-width:560px;margin:0 auto;background:#0e1c2e">
+    <div style="background:#f6f4ef;text-align:center;padding:22px 0"><img src="https://contrato.souzanetoadvocacia.com.br/logo.png" alt="Souza Neto Advocacia" width="190" style="display:inline-block;width:190px;max-width:72%;height:auto"></div>
+    <div style="padding:34px 28px">
     <p style="font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#c2a26a;font-weight:bold;margin:0 0 18px">Pedido recebido</p>
     <h1 style="font-size:26px;color:#ffffff;margin:0 0 14px">${ola} Recebemos o seu pedido.</h1>
     <p style="font-size:15px;line-height:1.6;color:#c5cdd8;margin:0 0 18px">Seu pagamento está sendo processado. <strong style="color:#f6f4ef">Assim que ele for confirmado</strong>, você receberá um e-mail com as orientações dos próximos passos — o envio dos documentos e o agendamento da sua reunião com o advogado.</p>
@@ -154,7 +159,8 @@ Souza Neto Advocacia`;
       </td></tr>
     </table>
     <p style="font-size:13px;line-height:1.6;color:#8a8270;margin:0">Dúvidas? Responda este e-mail ou escreva para <a href="mailto:contato@souzanetoadvocacia.com.br" style="color:#c2a26a">contato@souzanetoadvocacia.com.br</a>.</p>
-    <p style="font-size:12px;color:#5a6472;margin:22px 0 0">© Souza Neto Sociedade Individual de Advocacia · OAB/MS 22.741</p>
+    <p style="font-size:12px;color:#5a6472;margin:24px 0 0">© 2026 Souza Neto Sociedade Individual de Advocacia · CNPJ 35.547.670/0001-07 · Dr. Antônio Barbosa de Souza Neto — OAB/MS 22.741</p>
+    </div>
   </div></body></html>`;
   return { text, html };
 }
