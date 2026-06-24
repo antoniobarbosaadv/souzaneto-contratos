@@ -21,14 +21,20 @@
   })();
 </script>
 
-<title>Pagamento recebido — próximos passos | Souza Neto Advocacia</title>
+<title>Recebemos a sua solicitação — Souza Neto Advocacia</title>
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <!-- ============================================================= -->
-<!-- GOOGLE ANALYTICS 4  →  TROQUE  AW-18266903821  pelo seu ID GA4  -->
+<!-- GOOGLE ANALYTICS 4 / GOOGLE ADS                                -->
+<!-- ATENÇÃO: esta página agora carrega ASSIM QUE o cliente volta   -->
+<!-- do checkout — ANTES de o pagamento ser confirmado (boleto leva -->
+<!-- 1 a 3 dias). Disparar "purchase" aqui conta como venda até     -->
+<!-- boleto não pago. O ideal é mover a conversão para a automação  -->
+<!-- (Make.com), disparando quando o pagamento for CONFIRMADO.      -->
+<!-- Por ora mantido o comportamento atual; ver passo do Google Ads.-->
 <!-- ============================================================= -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18266903821"></script>
 <script>
@@ -58,8 +64,12 @@
   body{background:#0e1c2e}
   a{transition:filter .15s ease}
   a:hover{filter:brightness(1.06)}
+  .dots{display:inline-flex;gap:5px;vertical-align:middle}
+  .dots span{width:7px;height:7px;border-radius:50%;background:#c2a26a;display:inline-block;animation:pulse 1.2s infinite ease-in-out}
+  .dots span:nth-child(2){animation-delay:.2s}
+  .dots span:nth-child(3){animation-delay:.4s}
+  @keyframes pulse{0%,80%,100%{opacity:.25}40%{opacity:1}}
   @media(max-width:768px){
-    .steps{grid-template-columns:1fr!important}
     main{padding:40px 20px!important}
     h1{font-size:30px!important;line-height:1.18!important}
   }
@@ -76,46 +86,39 @@
 
   <main style="flex:1;display:flex;align-items:center;justify-content:center;padding:56px 32px;position:relative">
     <div style="position:absolute;inset:0;background:radial-gradient(900px 460px at 50% -10%,rgba(194,162,106,0.16),transparent 62%)"></div>
-    <div style="position:relative;max-width:760px;width:100%;text-align:center">
+    <div style="position:relative;max-width:680px;width:100%;text-align:center">
 
-      <div style="width:62px;height:62px;border-radius:50%;background:#c2a26a;color:#0e1c2e;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:800;margin:0 auto 26px">✓</div>
-
-      <h1 style="font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:600;color:#ffffff;line-height:1.15;text-wrap:balance">Pagamento recebido! Faltam só 2 passos.</h1>
-      <p style="margin:18px auto 0;font-size:17px;line-height:1.6;color:#c5cdd8;max-width:560px">Para o advogado já chegar à reunião com tudo em mãos, conclua os dois passos abaixo. Leva poucos minutos.</p>
-
-      <div style="margin:26px auto 0;max-width:600px;background:rgba(194,162,106,0.12);border:1px solid rgba(194,162,106,0.45);border-radius:10px;padding:18px 22px;text-align:left">
-        <p style="margin:0;font-size:15px;line-height:1.6;color:#f6f4ef"><strong style="color:#c2a26a">⚑ Importante — salve esta página (ou o link do passo 1).</strong> É por ali que você envia seus documentos. <strong>Não tem todos agora? Sem problema:</strong> você pode voltar pelo mesmo link e enviar quando tiver. Você tem <strong>até 15 dias</strong> após o pagamento.</p>
+      <!-- Selo: processando -->
+      <div style="display:inline-flex;align-items:center;gap:10px;background:rgba(194,162,106,0.12);border:1px solid rgba(194,162,106,0.45);color:#c2a26a;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:9px 18px;border-radius:999px;margin:0 auto 26px">
+        Processando pagamento
+        <span class="dots"><span></span><span></span><span></span></span>
       </div>
 
-      <div class="steps" style="margin-top:44px;display:grid;grid-template-columns:1fr 1fr;gap:20px;text-align:left">
+      <h1 style="font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:600;color:#ffffff;line-height:1.15;text-wrap:balance">Recebemos a sua solicitação!</h1>
 
-        <!-- PASSO 1 — INFORMAÇÕES E DOCUMENTOS (TALLY) -->
-        <div style="background:rgba(194,162,106,0.08);border:1px solid rgba(194,162,106,0.35);border-radius:10px;padding:32px 30px;display:flex;flex-direction:column">
-          <div style="font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:600;color:#c2a26a;line-height:1">1</div>
-          <h2 style="margin-top:12px;font-size:21px;font-weight:700;color:#ffffff">Envie informações e documentos</h2>
-          <p style="margin-top:10px;font-size:14.5px;line-height:1.6;color:#c5cdd8;flex:1">Preencha o formulário com os dados do contrato e anexe os documentos (RG, CPF, matrícula, etc.). Pode enviar o que faltar depois.</p>
-          <!-- TROQUE o href pelo link do seu formulário TALLY -->
-          <a href="https://tally.so/r/zxgAgM" target="_blank" rel="noopener"
-             style="margin-top:20px;display:inline-block;text-align:center;background:#c2a26a;color:#0e1c2e;text-decoration:none;font-size:15px;font-weight:700;padding:14px 22px;border-radius:5px">Preencher e anexar documentos →</a>
-        </div>
+      <p style="margin:20px auto 0;font-size:17px;line-height:1.65;color:#c5cdd8;max-width:560px">
+        Seu pagamento está sendo processado. <strong style="color:#f6f4ef">Assim que ele for confirmado</strong>,
+        você receberá um e-mail com as orientações dos próximos passos — o envio dos documentos
+        e o agendamento da sua reunião com o advogado.
+      </p>
 
-        <!-- PASSO 2 — AGENDAR REUNIÃO (READ.AI) -->
-        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.12);border-radius:10px;padding:32px 30px;display:flex;flex-direction:column">
-          <div style="font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:600;color:#c2a26a;line-height:1">2</div>
-          <h2 style="margin-top:12px;font-size:21px;font-weight:700;color:#ffffff">Agende sua reunião</h2>
-          <p style="margin-top:10px;font-size:14.5px;line-height:1.6;color:#c5cdd8;flex:1">Escolha o melhor horário para conversar com o advogado (até 30 min, por vídeo). A reunião é gravada para registro.</p>
-          <!-- Link de agendamento Read.ai (troque se mudar o link) -->
-          <a href="https://cal.read.ai/contratos-sn/30-min" target="_blank" rel="noopener"
-             style="margin-top:20px;display:inline-block;text-align:center;background:transparent;border:1px solid #c2a26a;color:#c2a26a;text-decoration:none;font-size:15px;font-weight:700;padding:14px 22px;border-radius:5px">Escolher horário →</a>
-        </div>
-
+      <div style="margin:30px auto 0;max-width:600px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:22px 26px;text-align:left">
+        <p style="margin:0;font-size:15px;line-height:1.65;color:#c5cdd8">
+          <strong style="color:#c2a26a">Quanto tempo leva?</strong> Pagamentos por <strong style="color:#f6f4ef">cartão</strong>
+          e <strong style="color:#f6f4ef">Pix</strong> são confirmados em instantes.
+          <strong style="color:#f6f4ef">Boletos</strong> podem levar de 1 a 3 dias úteis para compensar.
+        </p>
+        <p style="margin:14px 0 0;font-size:15px;line-height:1.65;color:#c5cdd8">
+          Você <strong style="color:#f6f4ef">não precisa fazer mais nada agora</strong>. Pode fechar esta página
+          com tranquilidade — as orientações chegarão no e-mail que você informou.
+        </p>
       </div>
 
-      <div style="margin-top:30px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:20px 24px;text-align:left">
-        <p style="font-size:13.5px;line-height:1.65;color:#aeb8c4;margin:0">Lembrete: o prazo de <strong style="color:#dde3ea">24h</strong> para entrega começa a contar a partir do recebimento de <strong style="color:#dde3ea">toda</strong> a documentação e da reunião. Você tem até <strong style="color:#dde3ea">15 dias</strong> para enviar tudo.</p>
-      </div>
-
-      <p style="margin-top:26px;font-size:13.5px;color:#8a8270">Algum problema? Escreva para <a href="mailto:contato@souzanetoadvocacia.com.br" style="color:#c2a26a;text-decoration:none;font-weight:600">contato@souzanetoadvocacia.com.br</a></p>
+      <p style="margin:26px auto 0;font-size:13.5px;line-height:1.65;color:#8a8270;max-width:560px">
+        Não encontrou nosso e-mail? Confira a caixa de <strong style="color:#aeb8c4">spam</strong> ou
+        <strong style="color:#aeb8c4">promoções</strong>. Qualquer dúvida, escreva para
+        <a href="mailto:contato@souzanetoadvocacia.com.br" style="color:#c2a26a;text-decoration:none;font-weight:600">contato@souzanetoadvocacia.com.br</a>.
+      </p>
 
     </div>
   </main>
