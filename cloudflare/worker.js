@@ -30,7 +30,7 @@
 //   CONTRACT_EMAILS       (KV Namespace) — dedup de e-mails já enviados
 // ============================================================================
 
-const ASAAS_URL = "https://api.asaas.com/api/v3";
+const ASAAS_URL = "https://api.asaas.com/v3";
 const PAID_STATUSES = ["CONFIRMED", "RECEIVED", "RECEIVED_IN_CASH"];
 
 const LINK_DOCUMENTOS  = "https://tally.so/r/zxgAgM";

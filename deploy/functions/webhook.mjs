@@ -33,7 +33,7 @@
 //                        que o pagamento confirma — conversão só de venda paga.
 // ============================================================================
 
-const ASAAS_URL = "https://api.asaas.com/api/v3";
+const ASAAS_URL = "https://api.asaas.com/v3";
 
 // Status que significam "pago" — só estes disparam o e-mail.
 const PAID_STATUSES = ["CONFIRMED", "RECEIVED", "RECEIVED_IN_CASH"];
