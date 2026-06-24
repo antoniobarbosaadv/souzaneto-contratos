@@ -105,7 +105,7 @@ Souza Neto Advocacia`;
 
   const html = `<!DOCTYPE html><html lang="pt-BR"><body style="margin:0;background:#0e1c2e;font-family:Arial,Helvetica,sans-serif;color:#f6f4ef">
   <div style="max-width:560px;margin:0 auto;background:#0e1c2e">
-    <div style="background:#f6f4ef;text-align:center;padding:22px 0"><img src="https://contrato.souzanetoadvocacia.com.br/logo.png" alt="Souza Neto Advocacia" width="190" style="display:inline-block;width:190px;max-width:72%;height:auto"></div>
+    <div style="background:#0e1c2e;text-align:center;padding:30px 0 6px"><div style="font-family:Georgia,'Times New Roman',serif;font-size:30px;letter-spacing:8px;color:#c2a26a">SOUZA NETO</div><div style="font-family:Arial,Helvetica,sans-serif;font-size:11px;letter-spacing:5px;color:#8a8270;margin-top:8px">A D V O C A C I A</div></div>
     <div style="padding:34px 28px">
     <p style="font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#c2a26a;font-weight:bold;margin:0 0 18px">Pagamento confirmado</p>
     <h1 style="font-size:26px;color:#ffffff;margin:0 0 14px">${ola} Faltam só 2 passos.</h1>
@@ -148,7 +148,7 @@ Souza Neto Advocacia`;
 
   const html = `<!DOCTYPE html><html lang="pt-BR"><body style="margin:0;background:#0e1c2e;font-family:Arial,Helvetica,sans-serif;color:#f6f4ef">
   <div style="max-width:560px;margin:0 auto;background:#0e1c2e">
-    <div style="background:#f6f4ef;text-align:center;padding:22px 0"><img src="https://contrato.souzanetoadvocacia.com.br/logo.png" alt="Souza Neto Advocacia" width="190" style="display:inline-block;width:190px;max-width:72%;height:auto"></div>
+    <div style="background:#0e1c2e;text-align:center;padding:30px 0 6px"><div style="font-family:Georgia,'Times New Roman',serif;font-size:30px;letter-spacing:8px;color:#c2a26a">SOUZA NETO</div><div style="font-family:Arial,Helvetica,sans-serif;font-size:11px;letter-spacing:5px;color:#8a8270;margin-top:8px">A D V O C A C I A</div></div>
     <div style="padding:34px 28px">
     <p style="font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#c2a26a;font-weight:bold;margin:0 0 18px">Pedido recebido</p>
     <h1 style="font-size:26px;color:#ffffff;margin:0 0 14px">${ola} Recebemos o seu pedido.</h1>
