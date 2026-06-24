@@ -68,7 +68,10 @@ async function getCustomer(payment, env) {
   if ((!email || !name) && customerId && env.ASAAS_API_KEY) {
     try {
       const res = await fetch(`${ASAAS_URL}/customers/${customerId}`, {
-        headers: { "access_token": env.ASAAS_API_KEY },
+        headers: {
+          "access_token": env.ASAAS_API_KEY,
+          "User-Agent": "souzaneto-webhook", // Asaas exige User-Agent no cabeçalho
+        },
       });
       const data = await res.json();
       email = email || (data && data.email);
