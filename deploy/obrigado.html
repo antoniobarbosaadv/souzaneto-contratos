@@ -61,6 +61,7 @@
   @media(max-width:768px){
     main{padding:40px 20px!important}
     h1{font-size:30px!important;line-height:1.18!important}
+    .cards{grid-template-columns:1fr!important}
   }
 </style>
 </head>
@@ -75,7 +76,7 @@
 
   <main style="flex:1;display:flex;align-items:center;justify-content:center;padding:56px 32px;position:relative">
     <div style="position:absolute;inset:0;background:radial-gradient(900px 460px at 50% -10%,rgba(194,162,106,0.16),transparent 62%)"></div>
-    <div style="position:relative;max-width:680px;width:100%;text-align:center">
+    <div id="proc" style="position:relative;max-width:680px;width:100%;text-align:center">
 
       <!-- Selo: processando -->
       <div style="display:inline-flex;align-items:center;gap:10px;background:rgba(194,162,106,0.12);border:1px solid rgba(194,162,106,0.45);color:#c2a26a;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:9px 18px;border-radius:999px;margin:0 auto 26px">
@@ -110,6 +111,26 @@
       </p>
 
     </div>
+
+    <!-- Bloco CONFIRMADO — exibido pelo script quando o pagamento já está pago (Pix/cartão) -->
+    <div id="conf" style="display:none;position:relative;max-width:760px;width:100%;text-align:center">
+      <div style="width:62px;height:62px;border-radius:50%;background:#c2a26a;color:#0e1c2e;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:800;margin:0 auto 24px">✓</div>
+      <h1 style="font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:600;color:#ffffff;line-height:1.15;text-wrap:balance">Pagamento confirmado!</h1>
+      <p style="margin:18px auto 0;font-size:17px;line-height:1.65;color:#c5cdd8;max-width:560px">Obrigado! Para o advogado chegar à reunião com tudo em mãos, conclua os 2 passos abaixo. Também enviamos estes links no seu e-mail.</p>
+      <div class="cards" style="margin:34px auto 0;display:grid;grid-template-columns:1fr 1fr;gap:20px;text-align:left">
+        <div style="background:rgba(194,162,106,0.08);border:1px solid rgba(194,162,106,0.35);border-radius:10px;padding:28px 26px;display:flex;flex-direction:column">
+          <div style="font-size:13px;color:#c2a26a;font-weight:700;letter-spacing:.04em">PASSO 1 · DOCUMENTOS</div>
+          <p style="margin-top:10px;font-size:14.5px;line-height:1.6;color:#c5cdd8;flex:1">Preencha o formulário com os dados do contrato e anexe os documentos (RG, CPF, matrícula, etc.).</p>
+          <a href="https://tally.so/r/zxgAgM" target="_blank" rel="noopener" style="margin-top:18px;display:inline-block;text-align:center;background:#c2a26a;color:#0e1c2e;text-decoration:none;font-size:15px;font-weight:700;padding:13px 22px;border-radius:5px">Enviar documentos →</a>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.12);border-radius:10px;padding:28px 26px;display:flex;flex-direction:column">
+          <div style="font-size:13px;color:#c2a26a;font-weight:700;letter-spacing:.04em">PASSO 2 · AGENDAMENTO</div>
+          <p style="margin-top:10px;font-size:14.5px;line-height:1.6;color:#c5cdd8;flex:1">Escolha o melhor horário para conversar com o advogado (até 30 min, por vídeo).</p>
+          <a href="https://cal.read.ai/contratos-sn/30-min" target="_blank" rel="noopener" style="margin-top:18px;display:inline-block;text-align:center;background:transparent;border:1px solid #c2a26a;color:#c2a26a;text-decoration:none;font-size:15px;font-weight:700;padding:13px 22px;border-radius:5px">Escolher horário →</a>
+        </div>
+      </div>
+      <p style="margin:24px auto 0;font-size:13.5px;line-height:1.65;color:#8a8270;max-width:560px">Você tem até <strong style="color:#aeb8c4">15 dias</strong> para enviar tudo. Dúvidas? <a href="mailto:contato@souzanetoadvocacia.com.br" style="color:#c2a26a;text-decoration:none;font-weight:600">contato@souzanetoadvocacia.com.br</a>.</p>
+    </div>
   </main>
 
   <footer style="border-top:1px solid rgba(255,255,255,0.06)">
@@ -117,5 +138,35 @@
   </footer>
 
 </div>
+
+<!-- ============================================================= -->
+<!-- PÁGINA INTELIGENTE — se o pagamento JÁ está confirmado          -->
+<!-- (Pix/cartão), mostra os 2 links na hora. Caso contrário         -->
+<!-- (boleto pendente), mantém a tela "Processando". O ID do         -->
+<!-- pagamento (pay_...) vem na URL do redirecionamento do Asaas.    -->
+<!-- ============================================================= -->
+<script>
+  (function () {
+    try {
+      var pid = null;
+      new URLSearchParams(window.location.search).forEach(function (v) {
+        if (!pid && /^pay_[A-Za-z0-9]+$/.test(v)) pid = v;
+      });
+      if (!pid) return; // sem ID na URL → mantém "Processando"
+      var WORKER = "https://souzaneto-webhook.absn-advogado.workers.dev";
+      fetch(WORKER + "/status?id=" + encodeURIComponent(pid))
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          if (d && d.paid) {
+            var proc = document.getElementById("proc");
+            var conf = document.getElementById("conf");
+            if (proc) proc.style.display = "none";
+            if (conf) conf.style.display = "block";
+          }
+        })
+        .catch(function () { /* silencioso: mantém "Processando" */ });
+    } catch (e) { /* mantém "Processando" */ }
+  })();
+</script>
 </body>
 </html>

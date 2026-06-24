@@ -210,6 +210,26 @@ async function forwardToAds(env, { email, name, value, paymentId, event }) {
 // ---------------- Handler ----------------
 export default {
   async fetch(request, env) {
+    const url = new URL(request.url);
+
+    // STATUS para a página de obrigado: GET /status?id=pay_xxx → { paid: bool }
+    // Consulta o pagamento no Asaas. CORS aberto (a página chama de outro domínio).
+    if (request.method === "GET" && url.pathname === "/status") {
+      const cors = { "Access-Control-Allow-Origin": "*", "Content-Type": "application/json", "Cache-Control": "no-store" };
+      const id = url.searchParams.get("id");
+      if (!id || !env.ASAAS_API_KEY) return new Response(JSON.stringify({ paid: false }), { headers: cors });
+      try {
+        const r = await fetch(`${ASAAS_URL}/payments/${id}`, {
+          headers: { "access_token": env.ASAAS_API_KEY, "User-Agent": "souzaneto-webhook" },
+        });
+        const d = await r.json();
+        const paid = PAID_STATUSES.includes(d && d.status);
+        return new Response(JSON.stringify({ paid: paid, status: (d && d.status) || null }), { headers: cors });
+      } catch (e) {
+        return new Response(JSON.stringify({ paid: false }), { headers: cors });
+      }
+    }
+
     // Health check / acesso direto no navegador
     if (request.method !== "POST") return new Response("ok", { status: 200 });
 
