@@ -231,6 +231,22 @@ export default async (request) => {
     return new Response("ignored", { status: 200 });
   }
 
+  // FILTRO DE ORIGEM — só dispara para pagamentos vindos do(s) link(s) do site
+  // de contratos. O Asaas inclui payment.paymentLink com o ID do link de origem.
+  // Configure ASAAS_PAYMENT_LINK_ID no Netlify (vários separados por vírgula).
+  // Sem essa variável, NÃO enviamos nada — evita mandar o e-mail de contrato
+  // para pagamentos de OUTROS serviços que caem na mesma conta Asaas.
+  const allowedLinks = (process.env.ASAAS_PAYMENT_LINK_ID || "")
+    .split(",").map((s) => s.trim()).filter(Boolean);
+  if (allowedLinks.length === 0) {
+    console.warn("ASAAS_PAYMENT_LINK_ID não configurado — e-mail NÃO enviado (sem filtro de origem).");
+    return new Response("no-source-filter", { status: 200 });
+  }
+  if (!allowedLinks.includes(payment.paymentLink)) {
+    console.log("Pagamento de outra origem, ignorado. paymentLink =", payment.paymentLink);
+    return new Response("ignored-source", { status: 200 });
+  }
+
   // Evita e-mail duplicado para o mesmo pagamento.
   const { seen, store } = await alreadyEmailed(payment.id);
   if (seen) {
