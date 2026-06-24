@@ -29,12 +29,14 @@
 
 <!-- ============================================================= -->
 <!-- GOOGLE ANALYTICS 4 / GOOGLE ADS                                -->
-<!-- ATENÇÃO: esta página agora carrega ASSIM QUE o cliente volta   -->
-<!-- do checkout — ANTES de o pagamento ser confirmado (boleto leva -->
-<!-- 1 a 3 dias). Disparar "purchase" aqui conta como venda até     -->
-<!-- boleto não pago. O ideal é mover a conversão para a automação  -->
-<!-- (Make.com), disparando quando o pagamento for CONFIRMADO.      -->
-<!-- Por ora mantido o comportamento atual; ver passo do Google Ads.-->
+<!-- IMPORTANTE: NÃO disparamos a conversão de venda aqui.           -->
+<!-- Esta página carrega quando o cliente volta do checkout — ANTES  -->
+<!-- de o pagamento ser confirmado (boleto leva 1 a 3 dias). A venda -->
+<!-- só pode contar como conversão DEPOIS que o Asaas confirma o     -->
+<!-- pagamento. Por isso a conversão é registrada no servidor, pela  -->
+<!-- função /api/webhook (que repassa a venda confirmada ao conector -->
+<!-- Make/Zapier → Google Ads). Aqui fica só o GA para métricas de   -->
+<!-- página; nenhum evento de compra é disparado.                    -->
 <!-- ============================================================= -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18266903821"></script>
 <script>
@@ -43,21 +45,8 @@
   gtag('js', new Date());
   gtag('config', 'AW-18266903821');
 
-  // Conversão registrada quando o cliente chega nesta página (após o checkout)
-  gtag('event', 'purchase', {
-    currency: 'BRL',
-    value: 989.00,
-    transaction_id: 'sn-' + Date.now()
-  });
-
-  // ---------------------------------------------------------------
-  // GOOGLE ADS (opcional) — descomente e troque AW-XXXXX/LABEL pelos
-  // dados da sua conversão no Google Ads para otimizar campanhas:
-  // gtag('event', 'conversion', {
-  //   send_to: 'AW-XXXXXXXXX/XXXXXXXXXXXXXXXX',
-  //   value: 989.00, currency: 'BRL'
-  // });
-  // ---------------------------------------------------------------
+  // (Sem evento de conversão aqui — a venda só é contada após a
+  //  confirmação do pagamento pelo Asaas, via /api/webhook.)
 </script>
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
