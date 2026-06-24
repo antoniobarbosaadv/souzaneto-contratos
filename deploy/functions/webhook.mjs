@@ -12,8 +12,9 @@
 //
 // COMO LIGAR (painel do Asaas → Configurações → Integrações → Webhooks):
 //   URL:    https://contrato.souzanetoadvocacia.com.br/api/webhook
-//   Eventos: PAYMENT_CONFIRMED e PAYMENT_RECEIVED  (pode marcar todos; o resto
-//            é ignorado aqui)
+//   Eventos: PAYMENT_CONFIRMED, PAYMENT_RECEIVED e PAYMENT_CREATED
+//            (PAYMENT_CREATED dispara o aviso "pedido recebido" no boleto;
+//             pode marcar todos os eventos — o resto é ignorado aqui)
 //   Token:  (opcional, recomendado) defina um texto secreto e coloque também
 //            na variável de ambiente ASAAS_WEBHOOK_TOKEN abaixo.
 //
@@ -24,6 +25,8 @@
 //                        Padrão: "Souza Neto Advocacia <contato@souzanetoadvocacia.com.br>"
 //   MAIL_BCC             (opcional) cópia oculta p/ você receber aviso de cada venda
 //   ASAAS_WEBHOOK_TOKEN  (opcional) mesmo token configurado no webhook do Asaas
+//   ASAAS_PAYMENT_LINK_ID (OBRIGATÓRIA) ID(s) do(s) link(s) do site de contratos.
+//                        Sem ela nenhum e-mail é enviado. Vários: separe por vírgula.
 //   ADS_HOOK_URL         (opcional) URL do "catch hook" do conector (Zapier/Make)
 //                        que registra a conversão no Google Ads. Quando definida,
 //                        esta função repassa { email, value } ao conector assim
@@ -49,11 +52,12 @@ const MAIL_FROM = process.env.MAIL_FROM
 // não estiver disponível, a função NÃO trava: ela segue e envia o e-mail
 // (é melhor um raro e-mail repetido do que o cliente ficar sem as orientações).
 // ---------------------------------------------------------------------------
-async function alreadyEmailed(paymentId) {
+// kind: "sent" = e-mail com os links (pago) · "ack" = aviso de pedido recebido (boleto).
+async function alreadyEmailed(paymentId, kind = "sent") {
   try {
     const { getStore } = await import("@netlify/blobs");
     const store = getStore("contract-emails");
-    const seen = await store.get(`sent:${paymentId}`);
+    const seen = await store.get(`${kind}:${paymentId}`);
     return { seen: !!seen, store };
   } catch (e) {
     console.warn("Blobs indisponível (seguindo sem dedup):", e?.message);
@@ -61,9 +65,9 @@ async function alreadyEmailed(paymentId) {
   }
 }
 
-async function markEmailed(store, paymentId) {
+async function markEmailed(store, paymentId, kind = "sent") {
   if (!store) return;
-  try { await store.set(`sent:${paymentId}`, new Date().toISOString()); }
+  try { await store.set(`${kind}:${paymentId}`, new Date().toISOString()); }
   catch (e) { console.warn("Falha ao marcar e-mail enviado:", e?.message); }
 }
 
@@ -148,18 +152,47 @@ Souza Neto Advocacia`;
   return { text, html };
 }
 
-async function sendEmail(to, name) {
+// E-mail "pedido recebido" — enviado quando o boleto é gerado (ainda não pago).
+// Dá ao cliente a mensagem de "estamos processando" na hora, já que ele paga no
+// banco e não volta ao site. NÃO contém os links (eles só vêm após o pagamento).
+function buildOrderReceivedEmail(name) {
+  const ola = name ? `Olá, ${name.split(" ")[0]}!` : "Olá!";
+  const text =
+`${ola}
+
+Recebemos o seu pedido de contrato — obrigado!
+
+Seu pagamento está sendo processado. Assim que ele for confirmado, você receberá um e-mail com as orientações dos próximos passos: o envio dos documentos e o agendamento da reunião com o advogado.
+
+Pagamentos por boleto podem levar de 1 a 3 dias úteis para compensar. Você não precisa fazer mais nada agora além de concluir o pagamento.
+
+Qualquer dúvida, é só responder este e-mail ou escrever para contato@souzanetoadvocacia.com.br.
+
+Souza Neto Advocacia`;
+
+  const html = `<!DOCTYPE html><html lang="pt-BR"><body style="margin:0;background:#0e1c2e;font-family:Arial,Helvetica,sans-serif;color:#f6f4ef">
+  <div style="max-width:560px;margin:0 auto;padding:36px 28px">
+    <p style="font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#c2a26a;font-weight:bold;margin:0 0 18px">Pedido recebido</p>
+    <h1 style="font-size:26px;color:#ffffff;margin:0 0 14px">${ola} Recebemos o seu pedido.</h1>
+    <p style="font-size:15px;line-height:1.6;color:#c5cdd8;margin:0 0 18px">Seu pagamento está sendo processado. <strong style="color:#f6f4ef">Assim que ele for confirmado</strong>, você receberá um e-mail com as orientações dos próximos passos — o envio dos documentos e o agendamento da sua reunião com o advogado.</p>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:0 0 22px">
+      <tr><td style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.12);border-radius:10px;padding:20px 24px">
+        <p style="font-size:14px;line-height:1.6;color:#c5cdd8;margin:0">Pagamentos por <strong style="color:#f6f4ef">boleto</strong> podem levar de 1 a 3 dias úteis para compensar. Você não precisa fazer mais nada agora além de concluir o pagamento.</p>
+      </td></tr>
+    </table>
+    <p style="font-size:13px;line-height:1.6;color:#8a8270;margin:0">Dúvidas? Responda este e-mail ou escreva para <a href="mailto:contato@souzanetoadvocacia.com.br" style="color:#c2a26a">contato@souzanetoadvocacia.com.br</a>.</p>
+    <p style="font-size:12px;color:#5a6472;margin:22px 0 0">© Souza Neto Sociedade Individual de Advocacia · OAB/MS 22.741</p>
+  </div></body></html>`;
+
+  return { text, html };
+}
+
+// Envia um e-mail pela API do Resend.
+async function resendSend({ to, subject, text, html }) {
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) throw new Error("RESEND_API_KEY não configurada");
 
-  const { text, html } = buildEmail(name);
-  const payload = {
-    from: MAIL_FROM,
-    to: [to],
-    subject: "Pagamento confirmado — seus próximos passos (documentos + agendamento)",
-    text,
-    html,
-  };
+  const payload = { from: MAIL_FROM, to: [to], subject, text, html };
   if (process.env.MAIL_BCC) payload.bcc = [process.env.MAIL_BCC];
 
   const res = await fetch("https://api.resend.com/emails", {
@@ -173,6 +206,24 @@ async function sendEmail(to, name) {
   const out = await res.text();
   if (!res.ok) throw new Error(`Resend ${res.status}: ${out.slice(0, 300)}`);
   console.log("E-mail enviado para", to, "→", out.slice(0, 120));
+}
+
+async function sendEmail(to, name) {
+  const { text, html } = buildEmail(name);
+  await resendSend({
+    to,
+    subject: "Pagamento confirmado — seus próximos passos (documentos + agendamento)",
+    text, html,
+  });
+}
+
+async function sendOrderReceivedEmail(to, name) {
+  const { text, html } = buildOrderReceivedEmail(name);
+  await resendSend({
+    to,
+    subject: "Recebemos seu pedido — estamos processando seu pagamento",
+    text, html,
+  });
 }
 
 // Repassa a venda confirmada para o conector (Zapier/Make), que registra a
@@ -224,22 +275,16 @@ export default async (request) => {
   const payment = body?.payment;
   console.log("Asaas webhook:", event, payment?.id, payment?.status, payment?.billingType);
 
-  // Só seguimos quando o pagamento está efetivamente pago.
-  const isPaid = PAID_STATUSES.includes(payment?.status)
-    || ["PAYMENT_CONFIRMED", "PAYMENT_RECEIVED", "PAYMENT_RECEIVED_IN_CASH"].includes(event);
-  if (!payment?.id || !isPaid) {
-    return new Response("ignored", { status: 200 });
-  }
+  if (!payment?.id) return new Response("ignored", { status: 200 });
 
-  // FILTRO DE ORIGEM — só dispara para pagamentos vindos do(s) link(s) do site
-  // de contratos. O Asaas inclui payment.paymentLink com o ID do link de origem.
-  // Configure ASAAS_PAYMENT_LINK_ID no Netlify (vários separados por vírgula).
-  // Sem essa variável, NÃO enviamos nada — evita mandar o e-mail de contrato
-  // para pagamentos de OUTROS serviços que caem na mesma conta Asaas.
+  // FILTRO DE ORIGEM — aplica a TODOS os eventos. Só seguimos para pagamentos
+  // vindos do(s) link(s) do site de contratos (payment.paymentLink). Sem a
+  // variável ASAAS_PAYMENT_LINK_ID, NÃO enviamos nada — evita mandar e-mail de
+  // contrato para pagamentos de OUTROS serviços que caem na mesma conta Asaas.
   const allowedLinks = (process.env.ASAAS_PAYMENT_LINK_ID || "")
     .split(",").map((s) => s.trim()).filter(Boolean);
   if (allowedLinks.length === 0) {
-    console.warn("ASAAS_PAYMENT_LINK_ID não configurado — e-mail NÃO enviado (sem filtro de origem).");
+    console.warn("ASAAS_PAYMENT_LINK_ID não configurado — nada enviado (sem filtro de origem).");
     return new Response("no-source-filter", { status: 200 });
   }
   if (!allowedLinks.includes(payment.paymentLink)) {
@@ -247,43 +292,66 @@ export default async (request) => {
     return new Response("ignored-source", { status: 200 });
   }
 
-  // Evita e-mail duplicado para o mesmo pagamento.
-  const { seen, store } = await alreadyEmailed(payment.id);
-  if (seen) {
-    console.log("Já enviado antes, ignorando:", payment.id);
-    return new Response("already-sent", { status: 200 });
-  }
-
-  // Descobre o e-mail do cliente.
   const apiKey = process.env.ASAAS_API_KEY;
-  const { email, name } = await getCustomer(payment, apiKey);
-  if (!email) {
-    console.error("Sem e-mail do cliente para o pagamento", payment.id);
-    // Retorna 200 para o Asaas não ficar retentando algo que não vai mudar.
-    return new Response("no-email", { status: 200 });
+
+  // Pagamento efetivamente pago?
+  const isPaid = PAID_STATUSES.includes(payment?.status)
+    || ["PAYMENT_CONFIRMED", "PAYMENT_RECEIVED", "PAYMENT_RECEIVED_IN_CASH"].includes(event);
+
+  // Boleto gerado e ainda não pago → manda o aviso de "pedido recebido".
+  const isBoletoPending = !isPaid
+    && payment?.billingType === "BOLETO"
+    && (event === "PAYMENT_CREATED" || payment?.status === "PENDING");
+
+  // ---------- Fluxo 1: pagamento CONFIRMADO → e-mail com os 2 links ----------
+  if (isPaid) {
+    const { seen, store } = await alreadyEmailed(payment.id, "sent");
+    if (seen) {
+      console.log("Links já enviados antes, ignorando:", payment.id);
+      return new Response("already-sent", { status: 200 });
+    }
+    const { email, name } = await getCustomer(payment, apiKey);
+    if (!email) {
+      console.error("Sem e-mail do cliente para o pagamento", payment.id);
+      return new Response("no-email", { status: 200 });
+    }
+    // Em falha de envio, retorna 5xx para o Asaas RETENTAR (e não marca como
+    // enviado, então a retentativa tentará de novo).
+    try {
+      await sendEmail(email, name);
+    } catch (e) {
+      console.error("Falha ao enviar e-mail dos links:", e?.message);
+      return new Response("send-failed", { status: 500 });
+    }
+    await markEmailed(store, payment.id, "sent");
+    // Registra a conversão paga no Google Ads (via conector), se configurado.
+    await forwardToAds({ email, name, value: payment?.value, paymentId: payment.id, event });
+    return new Response("OK", { status: 200 });
   }
 
-  // Envia. Se falhar, retornamos 5xx para o Asaas RETENTAR mais tarde
-  // (e não marcamos como enviado, então a retentativa tentará de novo).
-  try {
-    await sendEmail(email, name);
-  } catch (e) {
-    console.error("Falha ao enviar e-mail:", e?.message);
-    return new Response("send-failed", { status: 500 });
+  // ---------- Fluxo 2: boleto gerado → e-mail "pedido recebido" ----------
+  if (isBoletoPending) {
+    const { seen, store } = await alreadyEmailed(payment.id, "ack");
+    if (seen) {
+      console.log("Aviso de pedido recebido já enviado, ignorando:", payment.id);
+      return new Response("already-acked", { status: 200 });
+    }
+    const { email, name } = await getCustomer(payment, apiKey);
+    if (!email) {
+      console.error("Sem e-mail do cliente (pedido recebido) para", payment.id);
+      return new Response("no-email", { status: 200 });
+    }
+    try {
+      await sendOrderReceivedEmail(email, name);
+    } catch (e) {
+      console.error("Falha ao enviar e-mail de pedido recebido:", e?.message);
+      return new Response("send-failed", { status: 500 });
+    }
+    await markEmailed(store, payment.id, "ack");
+    return new Response("OK", { status: 200 });
   }
 
-  await markEmailed(store, payment.id);
-
-  // Registra a conversão paga no Google Ads (via conector), se configurado.
-  await forwardToAds({
-    email,
-    name,
-    value: payment?.value,
-    paymentId: payment.id,
-    event,
-  });
-
-  return new Response("OK", { status: 200 });
+  return new Response("ignored", { status: 200 });
 };
 
 export const config = { path: "/api/webhook" };
