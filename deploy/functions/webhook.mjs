@@ -33,7 +33,7 @@
 //                        que o pagamento confirma — conversão só de venda paga.
 // ============================================================================
 
-const ASAAS_URL = "https://api.asaas.com/api/v3";
+const ASAAS_URL = "https://api.asaas.com/v3";
 
 // Status que significam "pago" — só estes disparam o e-mail.
 const PAID_STATUSES = ["CONFIRMED", "RECEIVED", "RECEIVED_IN_CASH"];
@@ -91,7 +91,10 @@ async function getCustomer(payment, apiKey) {
   if ((!email || !name) && customerId && apiKey) {
     try {
       const res = await fetch(`${ASAAS_URL}/customers/${customerId}`, {
-        headers: { "access_token": apiKey },
+        headers: {
+          "access_token": apiKey,
+          "User-Agent": "souzaneto-webhook", // Asaas exige User-Agent no cabeçalho
+        },
       });
       const data = await res.json();
       email = email || data?.email;
