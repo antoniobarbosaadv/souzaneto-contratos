@@ -207,6 +207,29 @@ async function forwardToAds(env, { email, name, value, paymentId, event }) {
   }
 }
 
+// Avisa o Antônio quando um contrato é fechado (pagamento confirmado).
+// Define NOTIFY_EMAIL no Worker com o e-mail que deve receber os avisos.
+async function notifyOwner(env, { name, email, value, billingType, paymentId }) {
+  if (!env.NOTIFY_EMAIL) return;
+  const v = (typeof value === "number" ? value : Number(value) || 0).toFixed(2).replace(".", ",");
+  const text = `Novo contrato fechado!\n\nCliente: ${name || "-"}\nE-mail: ${email || "-"}\nValor: R$ ${v}\nForma: ${billingType || "-"}\nPagamento: ${paymentId}\n\nOs documentos (Tally) e o agendamento (Read.ai) chegarao conforme o cliente avancar.`;
+  const html = `<div style="font-family:Arial,Helvetica,sans-serif;max-width:520px;margin:0 auto;padding:24px;color:#1c2430">
+    <h2 style="color:#0e1c2e;margin:0 0 14px">🎉 Novo contrato fechado!</h2>
+    <table style="font-size:15px;line-height:1.9;border-collapse:collapse">
+      <tr><td style="color:#8a8270;padding-right:14px">Cliente:</td><td><strong>${name || "-"}</strong></td></tr>
+      <tr><td style="color:#8a8270;padding-right:14px">E-mail:</td><td>${email || "-"}</td></tr>
+      <tr><td style="color:#8a8270;padding-right:14px">Valor:</td><td><strong>R$ ${v}</strong></td></tr>
+      <tr><td style="color:#8a8270;padding-right:14px">Forma:</td><td>${billingType || "-"}</td></tr>
+    </table>
+    <p style="font-size:13px;color:#8a8270;margin-top:18px">Os documentos (Tally) e o agendamento (Read.ai) chegarão conforme o cliente avançar.</p>
+  </div>`;
+  try {
+    await resendSend(env, { to: env.NOTIFY_EMAIL, subject: `🎉 Novo contrato fechado — ${name || email || "cliente"}`, text, html });
+  } catch (e) {
+    console.warn("Falha ao avisar o dono (ignorado):", e && e.message);
+  }
+}
+
 // ---------------- Handler ----------------
 export default {
   async fetch(request, env) {
@@ -294,6 +317,7 @@ export default {
       }
       await markSent(env, payment.id, "sent");
       await forwardToAds(env, { email, name, value: payment.value, paymentId: payment.id, event });
+      await notifyOwner(env, { name, email, value: payment.value, billingType: payment.billingType, paymentId: payment.id });
       return new Response("OK", { status: 200 });
     }
 
