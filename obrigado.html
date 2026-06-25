@@ -29,12 +29,13 @@
 
 <!-- ============================================================= -->
 <!-- GOOGLE ANALYTICS 4 / GOOGLE ADS                                -->
-<!-- IMPORTANTE: NÃO disparamos a conversão de venda aqui.           -->
-<!-- O checkout agora aceita apenas Pix e Cartão (confirmação na     -->
-<!-- hora), então quem chega nesta página já pagou. Ainda assim, a   -->
-<!-- conversão de venda é registrada no SERVIDOR (Cloudflare Worker, -->
-<!-- ao receber a confirmação do Asaas), e não aqui — para manter    -->
-<!-- uma única fonte da verdade. Aqui fica só o GA de página.        -->
+<!-- Conversão de venda "Compra" (R$ 989) disparada no CARREGAMENTO -->
+<!-- desta página. A obrigado.html só abre com o token ?ok do       -->
+<!-- redirecionamento do Asaas (pagamento JÁ confirmado), então o   -->
+<!-- disparo conta apenas venda paga. Boleto não redireciona, logo  -->
+<!-- não gera conversão falsa. Obs.: o repasse server-side via      -->
+<!-- conector (ADS_HOOK_URL) NÃO está ativo, então não há contagem  -->
+<!-- dupla.                                                         -->
 <!-- ============================================================= -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18266903821"></script>
 <script>
@@ -42,7 +43,11 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'AW-18266903821');
-  // (Sem evento de conversão aqui — a venda é contada no servidor.)
+  gtag('event', 'conversion', {
+    'send_to': 'AW-18266903821/4mxWCMzi_MQcEI2qq4ZE',
+    'value': 989.0,
+    'currency': 'BRL'
+  });
 </script>
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
