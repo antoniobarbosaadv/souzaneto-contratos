@@ -36,6 +36,10 @@ const PAID_STATUSES = ["CONFIRMED", "RECEIVED", "RECEIVED_IN_CASH"];
 const LINK_DOCUMENTOS  = "https://tally.so/r/zxgAgM";
 const LINK_AGENDAMENTO = "https://cal.read.ai/contratos-sn/30-min";
 
+// Suporte por WhatsApp (linha de elaboração de contratos)
+const WHATS_NUM  = "(67) 99652-4709";
+const WHATS_LINK = "https://wa.me/5567996524709?text=Ol%C3%A1!%20Sou%20cliente%20e%20preciso%20de%20suporte%20sobre%20a%20elabora%C3%A7%C3%A3o%20do%20meu%20contrato";
+
 function mailFrom(env) {
   return env.MAIL_FROM || "Souza Neto Advocacia <contato@souzanetoadvocacia.com.br>";
 }
@@ -99,7 +103,7 @@ Seu pagamento foi confirmado — obrigado! Para o advogado chegar à reunião co
 
 Você tem até 15 dias para enviar tudo. Não tem todos os documentos agora? Sem problema, é só voltar pelo mesmo link e enviar quando tiver.
 
-Qualquer dúvida, é só responder este e-mail ou escrever para contato@souzanetoadvocacia.com.br.
+Qualquer dúvida, é só responder este e-mail, escrever para contato@souzanetoadvocacia.com.br ou falar no WhatsApp ${WHATS_NUM}: ${WHATS_LINK}
 
 Souza Neto Advocacia`;
 
@@ -124,7 +128,8 @@ Souza Neto Advocacia`;
         <a href="${LINK_AGENDAMENTO}" style="display:inline-block;border:1px solid #c2a26a;color:#c2a26a;text-decoration:none;font-size:14px;font-weight:bold;padding:13px 22px;border-radius:5px">Escolher horário →</a>
       </td></tr>
     </table>
-    <p style="font-size:13px;line-height:1.6;color:#8a8270;margin:0">Você tem até <strong style="color:#aeb8c4">15 dias</strong> para enviar tudo. Dúvidas? Responda este e-mail ou escreva para <a href="mailto:contato@souzanetoadvocacia.com.br" style="color:#c2a26a">contato@souzanetoadvocacia.com.br</a>.</p>
+    <p style="font-size:13px;line-height:1.6;color:#8a8270;margin:0 0 14px">Você tem até <strong style="color:#aeb8c4">15 dias</strong> para enviar tudo. Dúvidas? Responda este e-mail ou escreva para <a href="mailto:contato@souzanetoadvocacia.com.br" style="color:#c2a26a">contato@souzanetoadvocacia.com.br</a>.</p>
+    <p style="font-size:13px;line-height:1.6;color:#8a8270;margin:0">Precisa de ajuda? Fale com a gente no WhatsApp: <a href="${WHATS_LINK}" style="color:#25d366;font-weight:bold">${WHATS_NUM}</a>.</p>
     <p style="font-size:12px;color:#5a6472;margin:24px 0 0">© 2026 Souza Neto Sociedade Individual de Advocacia · CNPJ 35.547.670/0001-07 · Dr. Antônio Barbosa de Souza Neto — OAB/MS 22.741</p>
     </div>
   </div></body></html>`;
@@ -142,7 +147,7 @@ Seu pagamento está sendo processado. Assim que ele for confirmado, você recebe
 
 Pagamentos por boleto podem levar de 1 a 3 dias úteis para compensar. Você não precisa fazer mais nada agora além de concluir o pagamento.
 
-Qualquer dúvida, é só responder este e-mail ou escrever para contato@souzanetoadvocacia.com.br.
+Qualquer dúvida, é só responder este e-mail, escrever para contato@souzanetoadvocacia.com.br ou falar no WhatsApp ${WHATS_NUM}: ${WHATS_LINK}
 
 Souza Neto Advocacia`;
 
@@ -158,7 +163,8 @@ Souza Neto Advocacia`;
         <p style="font-size:14px;line-height:1.6;color:#c5cdd8;margin:0">Pagamentos por <strong style="color:#f6f4ef">boleto</strong> podem levar de 1 a 3 dias úteis para compensar. Você não precisa fazer mais nada agora além de concluir o pagamento.</p>
       </td></tr>
     </table>
-    <p style="font-size:13px;line-height:1.6;color:#8a8270;margin:0">Dúvidas? Responda este e-mail ou escreva para <a href="mailto:contato@souzanetoadvocacia.com.br" style="color:#c2a26a">contato@souzanetoadvocacia.com.br</a>.</p>
+    <p style="font-size:13px;line-height:1.6;color:#8a8270;margin:0 0 14px">Dúvidas? Responda este e-mail ou escreva para <a href="mailto:contato@souzanetoadvocacia.com.br" style="color:#c2a26a">contato@souzanetoadvocacia.com.br</a>.</p>
+    <p style="font-size:13px;line-height:1.6;color:#8a8270;margin:0">Precisa de ajuda? Fale com a gente no WhatsApp: <a href="${WHATS_LINK}" style="color:#25d366;font-weight:bold">${WHATS_NUM}</a>.</p>
     <p style="font-size:12px;color:#5a6472;margin:24px 0 0">© 2026 Souza Neto Sociedade Individual de Advocacia · CNPJ 35.547.670/0001-07 · Dr. Antônio Barbosa de Souza Neto — OAB/MS 22.741</p>
     </div>
   </div></body></html>`;
