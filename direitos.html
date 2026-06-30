@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Souza Neto Direitos — Seus direitos, sem juridiquês</title>
+  <meta name="description" content="Caiu num golpe? Sofreu acidente? Foi mandado embora? Descubra agora se você tem direito. Atendimento pelo WhatsApp — rápido e sem compromisso.">
+  <meta property="og:title" content="Souza Neto Direitos — Seus direitos, sem juridiquês">
+  <meta property="og:description" content="Caiu num golpe? Sofreu acidente? Foi mandado embora? Descubra agora se você tem direito.">
+  <meta property="og:type" content="website">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-481TC8DW6C"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-481TC8DW6C');
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:        #0E1C2E;
+      --amber:       #F2B705;
+      --amber-light: rgba(242,183,5,0.12);
+      --amber-mid:   rgba(242,183,5,0.30);
+      --white:       #ffffff;
+      --text:        #e2e8f0;
+      --muted:       #94a3b8;
+      --card:        rgba(255,255,255,0.04);
+      --border:      rgba(255,255,255,0.09);
+      --wa:          #25D366;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Montserrat', Arial, sans-serif;
+      background: var(--navy);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── HEADER ── */
+    header {
+      padding: 22px 20px 18px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .logo { display: inline-block; }
+    .logo .n { font-size: 24px; font-weight: 800; letter-spacing: 4px; color: var(--white); line-height: 1; text-transform: uppercase; }
+    .logo .s { font-size: 10px; font-weight: 700; letter-spacing: 5px; color: var(--amber); text-transform: uppercase; margin-top: 4px; }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 580px;
+      margin: 0 auto;
+      padding: 52px 24px 44px;
+      text-align: center;
+    }
+    .badge {
+      display: inline-block;
+      background: var(--amber-light);
+      border: 1px solid var(--amber-mid);
+      color: var(--amber);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: 34px;
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 18px;
+    }
+    .hero h1 em { font-style: normal; color: var(--amber); }
+    .hero p {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 32px;
+    }
+    .btn-wa {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--wa);
+      color: #fff;
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 16px 28px;
+      border-radius: 8px;
+      box-shadow: 0 6px 24px rgba(37,211,102,0.28);
+      transition: opacity .18s, transform .12s;
+    }
+    .btn-wa:hover { opacity: .9; transform: translateY(-1px); }
+    .btn-wa:active { transform: translateY(0); }
+    .hero-note { font-size: 12px; color: var(--muted); margin-top: 14px; }
+
+    /* ── DIVISOR ── */
+    .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+    /* ── SECTION SHARED ── */
+    .sec { padding: 52px 24px; }
+    .sec-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--amber);
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    .sec-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--white);
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .how { background: rgba(255,255,255,0.025); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .steps { display: flex; flex-direction: column; gap: 26px; max-width: 460px; margin: 0 auto; }
+    .step { display: flex; gap: 18px; align-items: flex-start; }
+    .step-num {
+      flex-shrink: 0;
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: var(--amber);
+      color: var(--navy);
+      font-size: 15px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .step h3 { font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+    .step p  { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+    /* ── TESES ── */
+    .teses-wrap { max-width: 620px; margin: 0 auto; }
+    .teses-grid { display: flex; flex-direction: column; gap: 14px; }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px 22px 20px;
+    }
+    .card.highlight {
+      border-color: var(--amber-mid);
+      background: var(--amber-light);
+    }
+    .card-head { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 14px; }
+    .card-icon { font-size: 26px; line-height: 1; flex-shrink: 0; margin-top: 2px; }
+    .card-title { font-size: 17px; font-weight: 800; color: var(--white); line-height: 1.2; }
+    .card-sub { font-size: 11px; font-weight: 600; color: var(--amber); text-transform: uppercase; letter-spacing: 1px; margin-top: 3px; }
+    .card-body { font-size: 14px; color: var(--muted); line-height: 1.72; margin-bottom: 18px; }
+    .card-body strong { color: var(--text); }
+
+    .cta-wa {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--wa);
+      color: #fff;
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 12px 20px;
+      border-radius: 7px;
+    }
+    .cta-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1.5px solid var(--amber);
+      color: var(--amber);
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 11px 20px;
+      border-radius: 7px;
+    }
+    .card-disc { font-size: 11px; color: rgba(148,163,184,.65); margin-top: 11px; line-height: 1.5; }
+
+    /* ── ABOUT ── */
+    .about { background: rgba(255,255,255,0.025); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .about-inner { max-width: 520px; margin: 0 auto; text-align: center; }
+    .avatar {
+      width: 84px; height: 84px;
+      border-radius: 50%;
+      background: rgba(242,183,5,.14);
+      border: 2px solid var(--amber-mid);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 34px; font-weight: 800;
+      color: var(--amber);
+      margin: 0 auto 20px;
+    }
+    .about-name { font-size: 19px; font-weight: 800; color: var(--white); }
+    .about-oab  { font-size: 11px; font-weight: 700; color: var(--amber); letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; margin-bottom: 18px; }
+    .about-text { font-size: 15px; color: var(--muted); line-height: 1.72; margin-bottom: 28px; }
+
+    /* ── FAQ ── */
+    .faq-wrap  { max-width: 560px; margin: 0 auto; }
+    .faq-list  { display: flex; flex-direction: column; gap: 12px; }
+    .faq-item  { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
+    .faq-q     { font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+    .faq-a     { font-size: 13px; color: var(--muted); line-height: 1.65; }
+
+    /* ── FINAL CTA ── */
+    .final {
+      background: var(--amber-light);
+      border-top: 1px solid var(--amber-mid);
+      border-bottom: 1px solid var(--amber-mid);
+      padding: 52px 24px;
+      text-align: center;
+    }
+    .final h2 { font-size: 26px; font-weight: 800; color: var(--white); line-height: 1.25; margin-bottom: 14px; }
+    .final p  { font-size: 15px; color: var(--muted); max-width: 380px; margin: 0 auto 28px; }
+
+    /* ── FOOTER ── */
+    footer { padding: 34px 24px; text-align: center; border-top: 1px solid var(--border); }
+    .footer-logo .n { font-size: 17px; font-weight: 800; letter-spacing: 3px; color: var(--white); }
+    .footer-logo .s { font-size: 9px; font-weight: 700; letter-spacing: 5px; color: var(--amber); margin-top: 2px; }
+    .footer-links { margin: 18px 0 20px; display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
+    .footer-links a { font-size: 13px; color: var(--muted); }
+    .footer-links a:hover { color: var(--amber); }
+    .footer-legal { font-size: 11px; color: rgba(148,163,184,.45); line-height: 1.65; max-width: 460px; margin: 0 auto; }
+
+    /* ── FLOATING WA ── */
+    .wa-float {
+      position: fixed; bottom: 22px; right: 18px; z-index: 900;
+      width: 56px; height: 56px;
+      background: var(--wa); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 18px rgba(37,211,102,.4);
+      transition: transform .18s;
+    }
+    .wa-float:hover { transform: scale(1.08); }
+
+    /* ── RESPONSIVE ── */
+    @media (min-width: 540px) {
+      .hero h1 { font-size: 42px; }
+      .final h2 { font-size: 30px; }
+    }
+    @media (min-width: 640px) {
+      .teses-grid { gap: 18px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    <div class="n">SOUZA NETO</div>
+    <div class="s">— &thinsp;D I R E I T O S</div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="badge">Seus direitos, sem juridiquês</div>
+  <h1>Você tem direitos que <em>ninguém te contou.</em></h1>
+  <p>Caiu num golpe? Sofreu acidente com sequela? Foi mandado embora? Não recebeu o salário-maternidade? Em poucos minutos você sabe se tem um caso.</p>
+  <a class="btn-wa" href="https://wa.me/5567996524709?text=Ol%C3%A1%21+Vi+um+v%C3%ADdeo+do+%40souzaneto.direitos+e+quero+entender+meus+direitos." target="_blank" rel="noopener">
+    <svg width="22" height="22" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path fill="#fff" d="M16 2C8.27 2 2 8.27 2 16c0 2.44.65 4.73 1.79 6.71L2 30l7.52-1.97A13.93 13.93 0 0016 30c7.73 0 14-6.27 14-14S23.73 2 16 2zm0 25.5a11.44 11.44 0 01-5.83-1.59l-.42-.25-4.34 1.14 1.15-4.22-.27-.43A11.5 11.5 0 1116 27.5zm6.3-8.57c-.35-.17-2.05-1.01-2.37-1.13-.32-.12-.55-.17-.78.17-.23.35-.9 1.13-1.1 1.36-.2.23-.4.26-.75.09-.35-.18-1.47-.54-2.8-1.73-1.03-.92-1.73-2.06-1.93-2.41-.2-.34-.02-.53.15-.7.16-.16.35-.4.53-.61.17-.2.23-.34.35-.58.12-.23.06-.44-.03-.61-.09-.18-.78-1.88-1.07-2.57-.28-.68-.57-.58-.78-.59-.2-.01-.44-.01-.67-.01-.23 0-.61.09-.93.44-.32.35-1.22 1.19-1.22 2.9s1.25 3.36 1.42 3.6c.18.23 2.46 3.75 5.96 5.26.83.36 1.48.57 1.99.73.83.26 1.59.22 2.18.13.67-.1 2.05-.84 2.34-1.65.29-.81.29-1.51.2-1.65-.08-.15-.32-.23-.67-.4z"/></svg>
+    Falar com o advogado
+  </a>
+  <p class="hero-note">WhatsApp · Rápido · Sem compromisso</p>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="sec how">
+  <div class="sec-label">Como funciona</div>
+  <div class="sec-title">Em 3 passos simples</div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div>
+        <h3>Você conta o que aconteceu</h3>
+        <p>Clica no botão do WhatsApp e descreve a situação com suas palavras. Sem formulário complicado.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div>
+        <h3>O Dr. Antônio avalia</h3>
+        <p>Advogado inscrito OAB/MS 22.741 analisa e responde se você tem direito — e quais são os próximos passos possíveis.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div>
+        <h3>Você decide o que fazer</h3>
+        <p>Com a informação na mão, você escolhe se quer prosseguir. Sem pressão.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 TESES -->
+<section class="sec">
+  <div class="teses-wrap">
+    <div class="sec-label">Áreas de atuação</div>
+    <div class="sec-title">Qual é a sua situação?</div>
+    <div class="teses-grid">
+
+      <!-- GOLPE DO PIX -->
+      <div class="card highlight">
+        <div class="card-head">
+          <div class="card-icon">🔓</div>
+          <div>
+            <div class="card-title">Golpe do Pix ou Fraude Bancária</div>
+            <div class="card-sub">Consumidor · CDC · STJ</div>
+          </div>
+        </div>
+        <p class="card-body">
+          Caiu num golpe do Pix, da falsa central do banco ou do falso parente no WhatsApp?
+          <strong>O banco disse que a culpa é só sua?</strong>
+          Nem sempre é assim. O STJ reconhece que os bancos têm dever de monitorar fraudes — e podem ser responsabilizados. Cada caso é um caso.
+        </p>
+        <a class="cta-wa" href="https://wa.me/5567996524709?text=EU+QUERO+%E2%80%94+Ca%C3%AD+no+golpe+do+Pix+%2F+fraude+banc%C3%A1ria+e+quero+entender+meus+direitos." target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path fill="#fff" d="M16 2C8.27 2 2 8.27 2 16c0 2.44.65 4.73 1.79 6.71L2 30l7.52-1.97A13.93 13.93 0 0016 30c7.73 0 14-6.27 14-14S23.73 2 16 2zm6.3 18.93c-.35-.17-2.05-1.01-2.37-1.13-.32-.12-.55-.17-.78.17-.23.35-.9 1.13-1.1 1.36-.2.23-.4.26-.75.09-.35-.18-1.47-.54-2.8-1.73-1.03-.92-1.73-2.06-1.93-2.41-.2-.34-.02-.53.15-.7.16-.16.35-.4.53-.61.17-.2.23-.34.35-.58.12-.23.06-.44-.03-.61-.09-.18-.78-1.88-1.07-2.57-.28-.68-.57-.58-.78-.59-.2-.01-.44-.01-.67-.01-.23 0-.61.09-.93.44-.32.35-1.22 1.19-1.22 2.9s1.25 3.36 1.42 3.6c.18.23 2.46 3.75 5.96 5.26.83.36 1.48.57 1.99.73.83.26 1.59.22 2.18.13.67-.1 2.05-.84 2.34-1.65.29-.81.29-1.51.2-1.65-.08-.15-.32-.23-.67-.4z"/></svg>
+          Comenta EU QUERO
+        </a>
+        <p class="card-disc">A análise depende das circunstâncias de cada caso. Nenhum resultado é garantido.</p>
+      </div>
+
+      <!-- AUXÍLIO-ACIDENTE -->
+      <div class="card">
+        <div class="card-head">
+          <div class="card-icon">🩹</div>
+          <div>
+            <div class="card-title">Auxílio-Acidente</div>
+            <div class="card-sub">INSS · Previdenciário</div>
+          </div>
+        </div>
+        <p class="card-body">
+          Sofreu um acidente — de qualquer natureza — e ficou com uma sequela que reduz sua capacidade de trabalho?
+          <strong>Você pode ter direito ao auxílio-acidente do INSS</strong>, um benefício mensal pago enquanto você continua trabalhando.
+          Muita gente nem sabe que existe. Cada caso depende da perícia médica.
+        </p>
+        <a class="cta-wa" href="https://wa.me/5567996524709?text=INSS+%E2%80%94+Sofri+um+acidente+com+sequela+e+quero+saber+se+tenho+direito+ao+aux%C3%ADlio-acidente." target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path fill="#fff" d="M16 2C8.27 2 2 8.27 2 16c0 2.44.65 4.73 1.79 6.71L2 30l7.52-1.97A13.93 13.93 0 0016 30c7.73 0 14-6.27 14-14S23.73 2 16 2zm6.3 18.93c-.35-.17-2.05-1.01-2.37-1.13-.32-.12-.55-.17-.78.17-.23.35-.9 1.13-1.1 1.36-.2.23-.4.26-.75.09-.35-.18-1.47-.54-2.8-1.73-1.03-.92-1.73-2.06-1.93-2.41-.2-.34-.02-.53.15-.7.16-.16.35-.4.53-.61.17-.2.23-.34.35-.58.12-.23.06-.44-.03-.61-.09-.18-.78-1.88-1.07-2.57-.28-.68-.57-.58-.78-.59-.2-.01-.44-.01-.67-.01-.23 0-.61.09-.93.44-.32.35-1.22 1.19-1.22 2.9s1.25 3.36 1.42 3.6c.18.23 2.46 3.75 5.96 5.26.83.36 1.48.57 1.99.73.83.26 1.59.22 2.18.13.67-.1 2.05-.84 2.34-1.65.29-.81.29-1.51.2-1.65-.08-.15-.32-.23-.67-.4z"/></svg>
+          Comenta INSS
+        </a>
+        <p class="card-disc">A análise depende de cada caso e da perícia. Nenhum resultado é garantido.</p>
+      </div>
+
+      <!-- SALÁRIO-MATERNIDADE -->
+      <div class="card">
+        <div class="card-head">
+          <div class="card-icon">👶</div>
+          <div>
+            <div class="card-title">Salário-Maternidade</div>
+            <div class="card-sub">INSS · Direitos da Mulher</div>
+          </div>
+        </div>
+        <p class="card-body">
+          O salário-maternidade não é só pra quem tem carteira assinada.
+          <strong>MEI, autônoma, desempregada dentro do período de graça</strong> — todas podem ter direito.
+          Muita gente deixa passar por não saber. Cada situação é uma situação, mas vale checar antes do prazo acabar.
+        </p>
+        <a class="cta-wa" href="https://wa.me/5567996524709?text=M%C3%83E+%E2%80%94+Quero+saber+se+tenho+direito+ao+sal%C3%A1rio-maternidade." target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path fill="#fff" d="M16 2C8.27 2 2 8.27 2 16c0 2.44.65 4.73 1.79 6.71L2 30l7.52-1.97A13.93 13.93 0 0016 30c7.73 0 14-6.27 14-14S23.73 2 16 2zm6.3 18.93c-.35-.17-2.05-1.01-2.37-1.13-.32-.12-.55-.17-.78.17-.23.35-.9 1.13-1.1 1.36-.2.23-.4.26-.75.09-.35-.18-1.47-.54-2.8-1.73-1.03-.92-1.73-2.06-1.93-2.41-.2-.34-.02-.53.15-.7.16-.16.35-.4.53-.61.17-.2.23-.34.35-.58.12-.23.06-.44-.03-.61-.09-.18-.78-1.88-1.07-2.57-.28-.68-.57-.58-.78-.59-.2-.01-.44-.01-.67-.01-.23 0-.61.09-.93.44-.32.35-1.22 1.19-1.22 2.9s1.25 3.36 1.42 3.6c.18.23 2.46 3.75 5.96 5.26.83.36 1.48.57 1.99.73.83.26 1.59.22 2.18.13.67-.1 2.05-.84 2.34-1.65.29-.81.29-1.51.2-1.65-.08-.15-.32-.23-.67-.4z"/></svg>
+          Comenta MÃE
+        </a>
+        <p class="card-disc">A análise depende de cada caso. Nenhum resultado é garantido.</p>
+      </div>
+
+      <!-- TRABALHISTA -->
+      <div class="card">
+        <div class="card-head">
+          <div class="card-icon">⚖️</div>
+          <div>
+            <div class="card-title">Direitos Trabalhistas</div>
+            <div class="card-sub">CLT · Rescisão · Hora Extra</div>
+          </div>
+        </div>
+        <p class="card-body">
+          Foi mandado embora e quer saber se o acerto foi correto? Faz hora extra e nunca recebe? Sofreu assédio moral?
+          <strong>Aviso prévio, FGTS + 40%, férias, 13º</strong> — cada verba tem que estar lá. Verificar não custa nada.
+        </p>
+        <a class="cta-wa" href="https://wa.me/5567996524709?text=ACERTO+%E2%80%94+Quero+verificar+meus+direitos+trabalhistas." target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path fill="#fff" d="M16 2C8.27 2 2 8.27 2 16c0 2.44.65 4.73 1.79 6.71L2 30l7.52-1.97A13.93 13.93 0 0016 30c7.73 0 14-6.27 14-14S23.73 2 16 2zm6.3 18.93c-.35-.17-2.05-1.01-2.37-1.13-.32-.12-.55-.17-.78.17-.23.35-.9 1.13-1.1 1.36-.2.23-.4.26-.75.09-.35-.18-1.47-.54-2.8-1.73-1.03-.92-1.73-2.06-1.93-2.41-.2-.34-.02-.53.15-.7.16-.16.35-.4.53-.61.17-.2.23-.34.35-.58.12-.23.06-.44-.03-.61-.09-.18-.78-1.88-1.07-2.57-.28-.68-.57-.58-.78-.59-.2-.01-.44-.01-.67-.01-.23 0-.61.09-.93.44-.32.35-1.22 1.19-1.22 2.9s1.25 3.36 1.42 3.6c.18.23 2.46 3.75 5.96 5.26.83.36 1.48.57 1.99.73.83.26 1.59.22 2.18.13.67-.1 2.05-.84 2.34-1.65.29-.81.29-1.51.2-1.65-.08-.15-.32-.23-.67-.4z"/></svg>
+          Comenta ACERTO
+        </a>
+        <p class="card-disc">A análise depende de cada caso. Nenhum resultado é garantido.</p>
+      </div>
+
+      <!-- CONTRATOS -->
+      <div class="card">
+        <div class="card-head">
+          <div class="card-icon">📄</div>
+          <div>
+            <div class="card-title">Elaboração de Contratos</div>
+            <div class="card-sub">Empresarial · Prestação de Serviços · PJ</div>
+          </div>
+        </div>
+        <p class="card-body">
+          Precisa de um contrato sob medida para sua empresa, freelance ou prestação de serviços?
+          <strong>Contrato mal feito é a forma mais cara de economizar.</strong>
+          Cláusula de rescisão, multa, foro e prazo são o que te protege quando o combinado desanda.
+        </p>
+        <a class="cta-outline" href="https://contrato.souzanetoadvocacia.com.br" target="_blank" rel="noopener">
+          Ver planos e contratar →
+        </a>
+      </div>
+
+    </div><!-- /teses-grid -->
+  </div>
+</section>
+
+<!-- SOBRE O ADVOGADO -->
+<section class="sec about">
+  <div class="about-inner">
+    <div class="avatar">A</div>
+    <div class="about-name">Dr. Antônio Barbosa de Souza Neto</div>
+    <div class="about-oab">OAB/MS 22.741 · Souza Neto Advocacia</div>
+    <p class="about-text">
+      Advogado com foco em direitos do cidadão comum — fraudes bancárias, INSS, trabalhista e contratos.
+      Aqui você não encontra juridiquês: encontra clareza sobre o que a lei diz e o que você pode fazer.
+      Cada caso é avaliado com atenção, sem pressa e sem enrolação.
+    </p>
+    <a class="btn-wa" href="https://wa.me/5567996524709?text=Ol%C3%A1%21+Vi+o+perfil+%40souzaneto.direitos+e+quero+conversar+sobre+meu+caso." target="_blank" rel="noopener">
+      <svg width="20" height="20" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path fill="#fff" d="M16 2C8.27 2 2 8.27 2 16c0 2.44.65 4.73 1.79 6.71L2 30l7.52-1.97A13.93 13.93 0 0016 30c7.73 0 14-6.27 14-14S23.73 2 16 2zm6.3 18.93c-.35-.17-2.05-1.01-2.37-1.13-.32-.12-.55-.17-.78.17-.23.35-.9 1.13-1.1 1.36-.2.23-.4.26-.75.09-.35-.18-1.47-.54-2.8-1.73-1.03-.92-1.73-2.06-1.93-2.41-.2-.34-.02-.53.15-.7.16-.16.35-.4.53-.61.17-.2.23-.34.35-.58.12-.23.06-.44-.03-.61-.09-.18-.78-1.88-1.07-2.57-.28-.68-.57-.58-.78-.59-.2-.01-.44-.01-.67-.01-.23 0-.61.09-.93.44-.32.35-1.22 1.19-1.22 2.9s1.25 3.36 1.42 3.6c.18.23 2.46 3.75 5.96 5.26.83.36 1.48.57 1.99.73.83.26 1.59.22 2.18.13.67-.1 2.05-.84 2.34-1.65.29-.81.29-1.51.2-1.65-.08-.15-.32-.23-.67-.4z"/></svg>
+      Falar com o Dr. Antônio
+    </a>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec">
+  <div class="faq-wrap">
+    <div class="sec-label">Dúvidas frequentes</div>
+    <div class="sec-title">Perguntas rápidas</div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">O atendimento pelo WhatsApp é gratuito?</div>
+        <div class="faq-a">A conversa inicial para entender sua situação não tem custo. Se houver honorários para seguir com o caso, o Dr. Antônio te explica claramente antes de qualquer compromisso.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Preciso ter documentos em mãos agora?</div>
+        <div class="faq-a">Não. Conte o que aconteceu com suas palavras. Se precisar de documentação para avançar, você será orientado sobre o que reunir.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Atende todo o Brasil ou só Mato Grosso do Sul?</div>
+        <div class="faq-a">Para casos que podem ser conduzidos de forma remota — INSS, fraude bancária, trabalhista, contratos — o atendimento é nacional. Para ações que exigem presença local, será avaliado caso a caso.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Quanto tempo leva pra saber se tenho um caso?</div>
+        <div class="faq-a">Na maioria das situações, a avaliação inicial é respondida no mesmo dia. Casos mais complexos podem levar até 24 horas.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final">
+  <h2>Ainda na dúvida?<br>Manda uma mensagem.</h2>
+  <p>Em poucos minutos você sabe se tem um caso. Sem formulário, sem compromisso, sem juridiquês.</p>
+  <a class="btn-wa" href="https://wa.me/5567996524709?text=Ol%C3%A1%21+Vim+pelo+%40souzaneto.direitos+e+quero+entender+meus+direitos." target="_blank" rel="noopener">
+    <svg width="22" height="22" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path fill="#fff" d="M16 2C8.27 2 2 8.27 2 16c0 2.44.65 4.73 1.79 6.71L2 30l7.52-1.97A13.93 13.93 0 0016 30c7.73 0 14-6.27 14-14S23.73 2 16 2zm6.3 18.93c-.35-.17-2.05-1.01-2.37-1.13-.32-.12-.55-.17-.78.17-.23.35-.9 1.13-1.1 1.36-.2.23-.4.26-.75.09-.35-.18-1.47-.54-2.8-1.73-1.03-.92-1.73-2.06-1.93-2.41-.2-.34-.02-.53.15-.7.16-.16.35-.4.53-.61.17-.2.23-.34.35-.58.12-.23.06-.44-.03-.61-.09-.18-.78-1.88-1.07-2.57-.28-.68-.57-.58-.78-.59-.2-.01-.44-.01-.67-.01-.23 0-.61.09-.93.44-.32.35-1.22 1.19-1.22 2.9s1.25 3.36 1.42 3.6c.18.23 2.46 3.75 5.96 5.26.83.36 1.48.57 1.99.73.83.26 1.59.22 2.18.13.67-.1 2.05-.84 2.34-1.65.29-.81.29-1.51.2-1.65-.08-.15-.32-.23-.67-.4z"/></svg>
+    Falar agora pelo WhatsApp
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <div class="n">SOUZA NETO</div>
+    <div class="s">— &thinsp;D I R E I T O S</div>
+  </div>
+  <div class="footer-links">
+    <a href="https://instagram.com/souzaneto.direitos" target="_blank" rel="noopener">@souzaneto.direitos</a>
+    <a href="https://contrato.souzanetoadvocacia.com.br">Elaboração de contratos</a>
+    <a href="mailto:contato@souzanetoadvocacia.com.br">contato@souzanetoadvocacia.com.br</a>
+  </div>
+  <p class="footer-legal">
+    © 2026 Souza Neto Sociedade Individual de Advocacia · CNPJ 35.547.670/0001-07<br>
+    Dr. Antônio Barbosa de Souza Neto — OAB/MS 22.741<br>
+    As informações neste site têm caráter educativo e não constituem aconselhamento jurídico. Cada caso depende de análise individual. A contratação de serviços advocatícios segue a tabela de honorários da OAB.
+  </p>
+</footer>
+
+<!-- FLOATING WHATSAPP -->
+<a class="wa-float" href="https://wa.me/5567996524709?text=Ol%C3%A1%21+Vi+um+v%C3%ADdeo+do+%40souzaneto.direitos+e+quero+entender+meus+direitos." target="_blank" rel="noopener" aria-label="Falar pelo WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path fill="#fff" d="M16 2C8.27 2 2 8.27 2 16c0 2.44.65 4.73 1.79 6.71L2 30l7.52-1.97A13.93 13.93 0 0016 30c7.73 0 14-6.27 14-14S23.73 2 16 2zm0 25.5a11.44 11.44 0 01-5.83-1.59l-.42-.25-4.34 1.14 1.15-4.22-.27-.43A11.5 11.5 0 1116 27.5zm6.3-8.57c-.35-.17-2.05-1.01-2.37-1.13-.32-.12-.55-.17-.78.17-.23.35-.9 1.13-1.1 1.36-.2.23-.4.26-.75.09-.35-.18-1.47-.54-2.8-1.73-1.03-.92-1.73-2.06-1.93-2.41-.2-.34-.02-.53.15-.7.16-.16.35-.4.53-.61.17-.2.23-.34.35-.58.12-.23.06-.44-.03-.61-.09-.18-.78-1.88-1.07-2.57-.28-.68-.57-.58-.78-.59-.2-.01-.44-.01-.67-.01-.23 0-.61.09-.93.44-.32.35-1.22 1.19-1.22 2.9s1.25 3.36 1.42 3.6c.18.23 2.46 3.75 5.96 5.26.83.36 1.48.57 1.99.73.83.26 1.59.22 2.18.13.67-.1 2.05-.84 2.34-1.65.29-.81.29-1.51.2-1.65-.08-.15-.32-.23-.67-.4z"/></svg>
+</a>
+
+</body>
+</html>
