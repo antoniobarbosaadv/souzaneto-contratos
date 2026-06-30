@@ -241,6 +241,17 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
+    // Proxy transparente para direitos.souzanetoadvocacia.com.br
+    // A rota do Worker deve incluir: direitos.souzanetoadvocacia.com.br/*
+    if (url.hostname === "direitos.souzanetoadvocacia.com.br") {
+      const path = (url.pathname === "/" || url.pathname === "") ? "/direitos.html" : url.pathname;
+      const res  = await fetch("https://contrato.souzanetoadvocacia.com.br" + path,
+        { cf: { cacheEverything: true, cacheTtl: 300 } });
+      const headers = new Headers(res.headers);
+      headers.set("Cache-Control", "public, max-age=300");
+      return new Response(res.body, { status: res.status, headers });
+    }
+
     // STATUS para a página de obrigado: GET /status?id=pay_xxx → { paid: bool }
     // Consulta o pagamento no Asaas. CORS aberto (a página chama de outro domínio).
     if (request.method === "GET" && url.pathname === "/status") {
